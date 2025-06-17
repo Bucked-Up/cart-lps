@@ -10,7 +10,7 @@ import toggleLoading from "./modules/toggleLoading.js";
 const main = async ({ noCart, country, dataLayer, productIds, couponCode }) => {
   try {
     toggleLoading();
-    const products = await fetchProducts({ ids: productIds.map((el) => el.id) });
+    const products = await fetchProducts({ productIds: productIds });
     if (products.some((product) => Object.keys(product.stock).every((key) => product.stock[key] <= 0))) throw new Error("Out of stock products.");
     handleIntellimize();
     setCookies({ couponCode, pageId: dataLayer.pageId });
@@ -44,6 +44,6 @@ main({
   noCart: false,
   country: "us",
   dataLayer: {pageId: "test"},
-  productIds: [{ id: 935 }, { id: 924 }, { id: 979 }],
+  productIds: [{ id: 935, title: "test title" }, { id: 924 }, { id: 979 }],
   couponCode: "test",
 });
