@@ -1,4 +1,5 @@
 import setVibeLead from "./setVibeLead.js";
+import toggleLoading from "./toggleLoading.js";
 
 const handleBuy = (country) => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -19,6 +20,7 @@ const handleBuy = (country) => {
     i++;
   }
   setVibeLead();
+  toggleLoading();
   if (country === "uk") window.location.href = `https://www.buckedup.co.uk/cart/add?${string}&clear=true&${urlParams}`;
   else window.location.href = `https://${country && country !== "us" ? country + "." : ""}buckedup.com/cart/add?${string}&clear=true&${urlParams}`;
 };
