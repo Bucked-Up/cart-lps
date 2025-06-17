@@ -8,6 +8,11 @@ import setCookies from "./modules/setCookies.js";
 import toggleLoading from "./modules/toggleLoading.js";
 
 const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => {
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+      document.body.classList.remove("loading");
+    }
+  });
   try {
     toggleLoading();
     const products = await fetchProducts({ productIds: productIds });
