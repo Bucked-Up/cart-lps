@@ -7,13 +7,13 @@ import handleIntellimize from "./modules/intellimize.js";
 import setCookies from "./modules/setCookies.js";
 import toggleLoading from "./modules/toggleLoading.js";
 
-const lpCart = async ({ noCart, country, dataLayer, productIds, couponCode }) => {
+const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => {
   try {
     toggleLoading();
     const products = await fetchProducts({ productIds: productIds });
     if (products.some((product) => Object.keys(product.stock).every((key) => product.stock[key] <= 0))) throw new Error("Out of stock products.");
     handleIntellimize();
-    setCookies({ couponCode, pageId: dataLayer.pageId });
+    setCookies({ couponCode, pageId: pageData.pageId });
     localStorage.setItem("lp_products", "{}");
     localStorage.setItem("lp_coupon", couponCode);
 
@@ -45,11 +45,11 @@ const lpCart = async ({ noCart, country, dataLayer, productIds, couponCode }) =>
     handleError();
   }
 };
-lpCart({
-  noCart: false,
-  country: "us",
-  dataLayer: { pageId: "test" },
-  productIds: [{ id: 935, title: "test title" }, { id: 924 }, { id: 979 }],
-  couponCode: "test",
-});
+// lpCart({
+  // noCart: false,
+  // country: "us",
+  // pageData: { pageId: "test" },
+  // productIds: [{ id: 935, title: "test title" }, { id: 924 }, { id: 979 }],
+  // couponCode: "test",
+// });
 window.lpCart = lpCart;

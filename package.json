@@ -2,7 +2,7 @@
   "name": "cart-shopify",
   "version": "1.0.0",
   "main": "./src/js/scripts.js",
-  "repository": "git@github.com:Bucked-Up/cart-shopify.git",
+  "repository": "git@github.com:Bucked-Up/cart-lps.git",
   "author": "deigo-lps <diego.lopes0909@gmail.com>",
   "license": "",
   "private": true,
@@ -12,6 +12,6 @@
     "terser": "^5.34.1"
   },
   "scripts": {
-    "build": "browserify ./src/js/scripts.js -o cart-shopify.min.js -p esmify && terser cart-shopify.min.js -o cart-shopify.min.js"
+    "build": "browserify ./src/js/scripts.js -o cart-lps.min.js -p esmify && terser cart-lps.min.js -o cart-lps.min.js"
   }
 }
