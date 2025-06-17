@@ -1,3 +1,5 @@
+import setVibeLead from "./setVibeLead.js";
+
 const handleBuy = (country) => {
   const urlParams = new URLSearchParams(window.location.search);
   urlParams.set("cc", localStorage.getItem("lp_coupon") || urlParams.get("cc"));
@@ -16,6 +18,7 @@ const handleBuy = (country) => {
       });
     i++;
   }
+  setVibeLead();
   if (country === "uk") window.location.href = `https://www.buckedup.co.uk/cart/add?${string}&clear=true&${urlParams}`;
   else window.location.href = `https://${country && country !== "us" ? country + "." : ""}buckedup.com/cart/add?${string}&clear=true&${urlParams}`;
 };

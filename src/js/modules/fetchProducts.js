@@ -1,3 +1,5 @@
+import sendViewedProducts from "./sendViewedProducts.js";
+
 const fetchProducts = async ({ country, ids }) => {
   const fetchApi = async (id) => {
     let url = `https://ar5vgv5qw5.execute-api.us-east-1.amazonaws.com/list/${id}`;
@@ -13,6 +15,7 @@ const fetchProducts = async ({ country, ids }) => {
     }
   };
   const data = await Promise.all(ids.map(fetchApi));
+  sendViewedProducts(data);
   data.forEach((item) => {
     if (Object.keys(item.product.stock).every((key) => item.product.stock[key] <= 0)) console.error(`${item.product.name} Out of stock.`);
   });

@@ -3,22 +3,26 @@ import createProducts from "./modules/createProducts.js";
 import fetchProducts from "./modules/fetchProducts.js";
 import handleBuy from "./modules/handleBuy.js";
 import handleError from "./modules/handleError.js";
+import handleIntellimize from "./modules/intellimize.js";
+import setCookies from "./modules/setCookies.js";
 import toggleLoading from "./modules/toggleLoading.js";
 
 const main = async ({ noCart, country, dataLayer, productIds, couponCode }) => {
-  try{
+  try {
     toggleLoading();
     const products = await fetchProducts({ ids: productIds.map((el) => el.id) });
-    if(products.some(product=>Object.keys(product.stock).every(key=>product.stock[key]<=0))) throw new Error("Out of stock products.")
+    if (products.some((product) => Object.keys(product.stock).every((key) => product.stock[key] <= 0))) throw new Error("Out of stock products.");
+    handleIntellimize();
+    setCookies({ couponCode, pageId: dataLayer.pageId });
     localStorage.setItem("lp_products", "{}");
     localStorage.setItem("lp_coupon", couponCode);
-  
+
     const [cartWrapper, inCartContainer, buyButton] = createCart();
     document.body.appendChild(cartWrapper);
     document.querySelector("[cart-qtty]").innerHTML = Object.keys(products).length;
-  
+
     createProducts({ products, inCartContainer, cartWrapper });
-  
+
     const buttons = document.querySelectorAll("[cart-button]");
     buttons.forEach((button) => {
       const properties = button.getAttribute("cart-button");
@@ -28,10 +32,10 @@ const main = async ({ noCart, country, dataLayer, productIds, couponCode }) => {
         }
       });
     });
-  
+
     buyButton.addEventListener("click", () => handleBuy(country));
     toggleLoading();
-  }catch(e){
+  } catch (e) {
     console.error(e);
     handleError();
   }
@@ -39,7 +43,7 @@ const main = async ({ noCart, country, dataLayer, productIds, couponCode }) => {
 main({
   noCart: false,
   country: "us",
-  dataLayer: {},
+  dataLayer: {pageId: "test"},
   productIds: [{ id: 935 }, { id: 924 }, { id: 979 }],
   couponCode: "test",
 });
