@@ -5,8 +5,7 @@ const fetchProducts = async ({ country, ids }) => {
     try {
       const response = await fetch(url);
       if (response.status === 404) throw new Error(`Product ${id} Not Found.`);
-      if (response.status == 500 || response.status == 400)
-        throw new Error("Sorry, there was a problem.");
+      if (response.status == 500 || response.status == 400) throw new Error("Sorry, there was a problem.");
       const data = await response.json();
       return data;
     } catch (error) {
@@ -14,6 +13,9 @@ const fetchProducts = async ({ country, ids }) => {
     }
   };
   const data = await Promise.all(ids.map(fetchApi));
+  data.forEach((item) => {
+    if (Object.keys(item.product.stock).every((key) => item.product.stock[key] <= 0)) console.error(`${item.product.name} Out of stock.`);
+  });
   return data.map((data) => data.product);
 };
 

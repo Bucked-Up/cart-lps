@@ -35,7 +35,6 @@ const createSizesSelector = ({ product, option }) => {
     const labelText = document.createElement("span");
     labelText.classList.add("label-text");
     let [size, price] = getInputText({ name: value.name }).split(" (");
-    console.log(size, price);
     labelText.innerHTML = size;
     buttonWrapper.appendChild(input);
     buttonWrapper.appendChild(label);

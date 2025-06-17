@@ -1,26 +1,40 @@
+import checkSizeStock from "./checkSizeStock.js";
+import isDependent from "./isDependent.js";
 import updateLocalStorageProduct from "./updateLocalStorageProduct.js";
 
 const createDropdownItems = ({ product, option, image, dropdownText, dropdownVariantsWrapper }) => {
-  option.values.forEach((value, i) => {
+  let hasChecked = false;
+  option.values.forEach((value) => {
     const valueId = `${product.id}-${option.id}-${value.id}`;
     const buttonWrapper = document.createElement("div");
     const input = document.createElement("input");
     const label = document.createElement("label");
     const ball = document.createElement("span");
     const text = document.createElement("span");
-    if (i === 0) {
+
+    input.type = "radio";
+    input.id = valueId;
+    input.name = `${product.id}-${option.id}`;
+    input.value = valueId;
+    input.setAttribute("hidden", "hidden");
+
+    if (
+      (isDependent(product) &&
+        Object.keys(product.stock)
+          .filter((key) => key.includes(value.id))
+          .every((key) => product.stock[key] <= 0)) ||
+      (!isDependent(product) && product.stock[`[${value.id}]`] <= 0)
+    ) {
+      input.setAttribute("disabled", "disabled");
+    } else if (!hasChecked) {
       updateLocalStorageProduct({
         productId: product.id,
         optionId: option.id,
         valueId: value.id,
       });
       input.checked = true;
+      hasChecked = true;
     }
-    input.type = "radio";
-    input.id = valueId;
-    input.name = `${product.id}-${option.id}`;
-    input.value = valueId;
-    input.setAttribute("hidden", "hidden");
 
     input.addEventListener("change", () => {
       updateLocalStorageProduct({
@@ -31,6 +45,7 @@ const createDropdownItems = ({ product, option, image, dropdownText, dropdownVar
       image.src = value.images[0];
       image.alt = value.name;
       dropdownText.innerHTML = value.name;
+      checkSizeStock({ product });
     });
 
     label.setAttribute("for", valueId);

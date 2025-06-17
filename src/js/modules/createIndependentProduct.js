@@ -1,4 +1,3 @@
-import createDropdownItems from "./createDropdownItems.js";
 import createDropdownSelector from "./createDropdownSelector.js";
 import createProductBase from "./createProductBase.js";
 
