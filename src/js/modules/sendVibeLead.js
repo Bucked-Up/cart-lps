@@ -1,4 +1,4 @@
-const setVibeLead = () => {
+const sendVibeLead = () => {
   try {
     vbpx("event", "lead");
   } catch (err) {
@@ -6,4 +6,4 @@ const setVibeLead = () => {
   }
 };
 
-export default setVibeLead;
+export default sendVibeLead;

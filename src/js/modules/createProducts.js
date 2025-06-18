@@ -3,6 +3,7 @@ import createDependentProduct from "./createDependentProduct.js";
 import createIndependentProduct from "./createIndependentProduct.js";
 import createStaticProduct from "./createStaticProduct.js";
 import isDependent from "./isDependent.js";
+import isStatic from "./isStatic.js";
 import updateLocalStorageProduct from "./updateLocalStorageProduct.js";
 
 const createProducts = ({ products, inCartContainer, cartWrapper }) => {
@@ -10,7 +11,7 @@ const createProducts = ({ products, inCartContainer, cartWrapper }) => {
 
   products.forEach((product) => {
     if (isDependent(product)) inCartContainer.appendChild(createDependentProduct({ product }));
-    else if (product.options.length === 0 || product.options[0].type === "static") {
+    else if (isStatic(product)) {
       inCartContainer.appendChild(createStaticProduct({ product }));
       updateLocalStorageProduct({ productId: product.id });
     } else

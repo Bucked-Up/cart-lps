@@ -1,9 +1,9 @@
 import createCart from "./modules/createCart.js";
-import createProducts from "./modules/createProducts.js";
 import fetchProducts from "./modules/fetchProducts.js";
 import handleBuy from "./modules/handleBuy.js";
+import handleCart from "./modules/handleCart.js";
 import handleError from "./modules/handleError.js";
-import handleProductProperties from "./modules/handleProductProperties.js";
+import handleNoCart from "./modules/handleNoCart.js";
 import handleIntellimize from "./modules/intellimize.js";
 import setCookies from "./modules/setCookies.js";
 import toggleLoading from "./modules/toggleLoading.js";
@@ -20,29 +20,18 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => 
     if (products.some((product) => Object.keys(product.stock).every((key) => product.stock[key] <= 0))) throw new Error("Out of stock products.");
     handleIntellimize();
     setCookies({ couponCode, pageId: pageData.pageId });
-    localStorage.setItem("lp_products", "{}");
-    localStorage.setItem("lp_coupon", couponCode);
 
     const [cartWrapper, inCartContainer, buyButton] = createCart();
     document.body.appendChild(cartWrapper);
 
     const buttons = document.querySelectorAll("[cart-button]");
     buttons.forEach((button) => {
-      let properties = button.getAttribute("cart-button");
       button.addEventListener("click", async () => {
-        document.body.classList.toggle("no-scroll");
-        document.querySelector("[cart-qtty]").innerHTML = 0;
-        if (!properties) {
-          localStorage.setItem("lp_coupon", couponCode);
-          handleProductProperties(products,productIds)
-          createProducts({ products, inCartContainer, cartWrapper });
-        } else {
-          properties = JSON.parse(button.getAttribute("cart-button"));
-          const filteredProducts = products.filter((product) => properties.productIds.map((id) => id.id).includes(Number(product.id)));
-          handleProductProperties(filteredProducts, properties.productIds);
-          if (properties.couponCode) localStorage.setItem("lp_coupon", properties.couponCode);
-          createProducts({ products: filteredProducts, inCartContainer, cartWrapper });
-        }
+        localStorage.setItem("lp_products", "{}");
+        localStorage.setItem("lp_coupon", couponCode);
+        const properties = JSON.parse(button.getAttribute("cart-button") || null);
+        if (noCart || (properties && properties.noCart)) handleNoCart({ properties, products, productIds });
+        else handleCart({ properties, products, productIds, inCartContainer, cartWrapper });
       });
     });
 
@@ -53,11 +42,5 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => 
     handleError();
   }
 };
-// lpCart({
-// noCart: false,
-// country: "us",
-// pageData: { pageId: "test" },
-// productIds: [{ id: 935, title: "test title" }, { id: 924 }, { id: 979 }],
-// couponCode: "test",
-// });
+
 window.lpCart = lpCart;
