@@ -3,6 +3,7 @@ import sendViewedProducts from "./sendViewedProducts.js";
 const fetchProducts = async ({ country, productIds }) => {
   const ids = productIds.map((el) => el.id);
   const fetchApi = async (id) => {
+    // let url = `https://www.buckedup.com/product/json/detail?product_id=${id}`;
     let url = `https://ar5vgv5qw5.execute-api.us-east-1.amazonaws.com/list/${id}`;
     if (country && country !== "us") url = url + `?country=${country}`;
     try {
@@ -10,8 +11,6 @@ const fetchProducts = async ({ country, productIds }) => {
       if (response.status === 404) throw new Error(`Product ${id} Not Found.`);
       if (response.status == 500 || response.status == 400) throw new Error("Sorry, there was a problem.");
       const data = await response.json();
-      const givenProduct = productIds.find((el) => el.id === id);
-      if(givenProduct.title) data.product.name = givenProduct.title
       return data;
     } catch (error) {
       return Promise.reject(error);

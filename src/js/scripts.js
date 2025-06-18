@@ -3,6 +3,7 @@ import createProducts from "./modules/createProducts.js";
 import fetchProducts from "./modules/fetchProducts.js";
 import handleBuy from "./modules/handleBuy.js";
 import handleError from "./modules/handleError.js";
+import handleProductProperties from "./modules/handleProductProperties.js";
 import handleIntellimize from "./modules/intellimize.js";
 import setCookies from "./modules/setCookies.js";
 import toggleLoading from "./modules/toggleLoading.js";
@@ -33,10 +34,12 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => 
         document.querySelector("[cart-qtty]").innerHTML = 0;
         if (!properties) {
           localStorage.setItem("lp_coupon", couponCode);
+          handleProductProperties(products,productIds)
           createProducts({ products, inCartContainer, cartWrapper });
         } else {
           properties = JSON.parse(button.getAttribute("cart-button"));
-          const filteredProducts = products.filter((product) => properties.productIds.includes(Number(product.id)));
+          const filteredProducts = products.filter((product) => properties.productIds.map((id) => id.id).includes(Number(product.id)));
+          handleProductProperties(filteredProducts, properties.productIds);
           if (properties.couponCode) localStorage.setItem("lp_coupon", properties.couponCode);
           createProducts({ products: filteredProducts, inCartContainer, cartWrapper });
         }
@@ -51,10 +54,10 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => 
   }
 };
 // lpCart({
-  // noCart: false,
-  // country: "us",
-  // pageData: { pageId: "test" },
-  // productIds: [{ id: 935, title: "test title" }, { id: 924 }, { id: 979 }],
-  // couponCode: "test",
+// noCart: false,
+// country: "us",
+// pageData: { pageId: "test" },
+// productIds: [{ id: 935, title: "test title" }, { id: 924 }, { id: 979 }],
+// couponCode: "test",
 // });
 window.lpCart = lpCart;

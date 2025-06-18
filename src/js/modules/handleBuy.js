@@ -12,7 +12,7 @@ const handleBuy = (country) => {
       document.querySelector(`[sizes-selector='${prodId}']`).classList.add("shake");
       return;
     }
-    string = string + `&products[${i}][id]=${prodId}&products[${i}][quantity]=${1}`;
+    string = string + `&products[${i}][id]=${prodId}&products[${i}][quantity]=${products[prodId].quantity || 1}`;
     if (products[prodId].type !== "static")
       Object.keys(products[prodId].options).forEach((optionId) => {
         string = string + `&products[${i}][options][${optionId}]=${products[prodId].options[optionId].value}`;

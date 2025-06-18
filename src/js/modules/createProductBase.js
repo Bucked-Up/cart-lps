@@ -21,7 +21,7 @@ const createProductBase = () => {
   productInfoWrapper.appendChild(productTitle);
   productInfoWrapper.appendChild(optionTitle);
 
-  return [card, image, productTitle, optionTitle, productInfoWrapper];
+  return [card, image, imageWrapper, productTitle, optionTitle, productInfoWrapper];
 };
 
 export default createProductBase;
