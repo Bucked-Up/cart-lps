@@ -1,3 +1,5 @@
+import { resetProducts } from "./appData.js";
+
 const createCart = () => {
   const cartWrapper = document.createElement("div");
   const cartOverlay = document.createElement("div");
@@ -43,7 +45,7 @@ const createCart = () => {
       cartWrapper.classList.toggle("active");
       document.body.classList.toggle("no-scroll");
       cartInCartContainer.innerHTML = "";
-      localStorage.setItem("lp_products", "{}");
+      resetProducts();
     });
   });
 

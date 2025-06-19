@@ -1,6 +1,6 @@
+import { setProduct } from "./appData.js";
 import checkSizeStock from "./checkSizeStock.js";
 import isDependent from "./isDependent.js";
-import updateLocalStorageProduct from "./updateLocalStorageProduct.js";
 
 const createDropdownItems = ({ product, option, image, dropdownText, dropdownVariantsWrapper }) => {
   let hasChecked = false;
@@ -27,7 +27,7 @@ const createDropdownItems = ({ product, option, image, dropdownText, dropdownVar
     ) {
       input.setAttribute("disabled", "disabled");
     } else if (!hasChecked) {
-      updateLocalStorageProduct({
+      setProduct({
         productId: product.id,
         optionId: option.id,
         valueId: value.id,
@@ -37,7 +37,7 @@ const createDropdownItems = ({ product, option, image, dropdownText, dropdownVar
     }
 
     input.addEventListener("change", () => {
-      updateLocalStorageProduct({
+      setProduct({
         productId: product.id,
         optionId: option.id,
         valueId: value.id,

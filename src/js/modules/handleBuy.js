@@ -1,10 +1,11 @@
+import { getCoupon, getProducts } from "./appData.js";
 import sendVibeLead from "./sendVibeLead.js";
 import toggleLoading from "./toggleLoading.js";
 
 const handleBuy = (country) => {
   const urlParams = new URLSearchParams(window.location.search);
-  urlParams.set("cc", localStorage.getItem("lp_coupon") || urlParams.get("cc"));
-  const products = JSON.parse(localStorage.getItem("lp_products"));
+  urlParams.set("cc", getCoupon());
+  const products = getProducts();
   let string = "";
   let i = 0;
   for (let prodId in products) {

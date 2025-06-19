@@ -1,3 +1,4 @@
+import { setCoupon } from "./appData.js";
 import createProducts from "./createProducts.js";
 import handleProductProperties from "./handleProductProperties.js";
 
@@ -7,7 +8,7 @@ const handleCart = ({ properties, products, productIds, inCartContainer, cartWra
   if (properties) {
     const filteredProducts = products.filter((product) => properties.productIds.map((id) => id.id).includes(Number(product.id)));
     handleProductProperties(filteredProducts, properties.productIds);
-    if (properties.couponCode) localStorage.setItem("lp_coupon", properties.couponCode);
+    if (properties.couponCode) setCoupon(properties.couponCode);
     createProducts({ products: filteredProducts, inCartContainer, cartWrapper });
   } else {
     handleProductProperties(products, productIds);

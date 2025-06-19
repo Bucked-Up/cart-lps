@@ -1,3 +1,4 @@
+import { setCoupon } from "./modules/appData.js";
 import createCart from "./modules/createCart.js";
 import fetchProducts from "./modules/fetchProducts.js";
 import handleBuy from "./modules/handleBuy.js";
@@ -27,8 +28,7 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => 
     const buttons = document.querySelectorAll("[cart-button]");
     buttons.forEach((button) => {
       button.addEventListener("click", async () => {
-        localStorage.setItem("lp_products", "{}");
-        localStorage.setItem("lp_coupon", couponCode);
+        setCoupon(couponCode)
         const properties = JSON.parse(button.getAttribute("cart-button") || null);
         if (noCart || (properties && properties.noCart)) handleNoCart({ properties, products, productIds });
         else handleCart({ properties, products, productIds, inCartContainer, cartWrapper });

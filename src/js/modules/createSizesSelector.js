@@ -1,4 +1,4 @@
-import updateLocalStorageProduct from "./updateLocalStorageProduct.js";
+import { setProduct } from "./appData.js";
 
 const createSizesSelector = ({ product, option }) => {
   const sizesSelector = document.createElement("div");
@@ -41,7 +41,7 @@ const createSizesSelector = ({ product, option }) => {
     label.appendChild(labelText);
     input.addEventListener("change", () => {
       sizesSelector.classList.remove("shake");
-      updateLocalStorageProduct({ productId: product.id, optionId: option.id, valueId: value.id });
+      setProduct({ productId: product.id, optionId: option.id, valueId: value.id });
     });
     if (price) {
       price = price.split("(")[0];

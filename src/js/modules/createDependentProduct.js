@@ -1,7 +1,7 @@
+import { setProductType } from "./appData.js";
 import createDropdownSelector from "./createDropdownSelector.js";
 import createProductBase from "./createProductBase.js";
 import createSizesSelector from "./createSizesSelector.js";
-import setProductType from "./setProductType.js";
 
 const createDependentProduct = ({ product }) => {
   document.querySelector("[cart-qtty]").innerHTML = +document.querySelector("[cart-qtty]").innerHTML+1

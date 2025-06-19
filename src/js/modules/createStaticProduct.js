@@ -1,5 +1,5 @@
+import { setProductQuantity } from "./appData.js";
 import createProductBase from "./createProductBase.js";
-import setProductQuantity from "./setProductQuantity.js";
 
 const createStaticProduct = ({ product }) => {
   document.querySelector("[cart-qtty]").innerHTML = +document.querySelector("[cart-qtty]").innerHTML + (product.quantity || 1);
