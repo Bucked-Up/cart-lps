@@ -17,7 +17,7 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => 
   });
   try {
     toggleLoading();
-    const products = await fetchProducts({ productIds: productIds });
+    const products = await fetchProducts({ productIds, country });
     if (products.some((product) => Object.keys(product.stock).every((key) => product.stock[key] <= 0))) throw new Error("Out of stock products.");
     handleIntellimize();
     setCookies({ couponCode, pageId: pageData.pageId });
@@ -28,7 +28,7 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => 
     const buttons = document.querySelectorAll("[cart-button]");
     buttons.forEach((button) => {
       button.addEventListener("click", async () => {
-        setCoupon(couponCode)
+        setCoupon(couponCode);
         const properties = JSON.parse(button.getAttribute("cart-button") || null);
         if (noCart || (properties && properties.noCart)) handleNoCart({ properties, products, productIds });
         else handleCart({ properties, products, productIds, inCartContainer, cartWrapper });

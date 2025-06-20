@@ -22,12 +22,22 @@ const setProductQuantity = ({ productId, productQuantity }) => {
   if (!products[productId]) products[productId] = {};
   products[productId].quantity = productQuantity;
 };
+const setProductValues = ({ productId, optionId, value }) => {
+  if (!products[productId].options) products[productId].options = {};
+  if (!products[productId].options[optionId]) products[productId].options[optionId] = {};
+  if (!products[productId].options[optionId].values) products[productId].options[optionId].values = [];
+  products[productId].options[optionId].values.push(value);
+};
+const removeProductValue = ({ productId, optionId, value }) => {
+  const values = products[productId].options[optionId].values;
+  values.splice(values.indexOf(value), 1);
+};
 const deleteProductOption = ({ productId, optionId }) => {
   delete products[productId].options[optionId];
 };
 
-const resetProducts = () =>{
-  products = {}
-}
+const resetProducts = () => {
+  products = {};
+};
 
-export { getProducts, getCoupon, setCoupon, setProduct, setProductType, setProductQuantity, deleteProductOption, resetProducts };
+export { getProducts, getCoupon, setCoupon, setProduct, setProductType, setProductQuantity, setProductValues, removeProductValue, deleteProductOption, resetProducts };
