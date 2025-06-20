@@ -29,7 +29,7 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => 
     buttons.forEach((button) => {
       button.addEventListener("click", async () => {
         setCoupon(couponCode);
-        const properties = JSON.parse(button.getAttribute("cart-button") || null);
+        const properties = JSON.parse(button.getAttribute("cart-button").replaceAll("'",'"') || null);
         if (noCart || (properties && properties.noCart)) handleNoCart({ properties, products, productIds });
         else handleCart({ properties, products, productIds, inCartContainer, cartWrapper });
       });
