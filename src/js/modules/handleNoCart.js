@@ -2,7 +2,7 @@ import { setCoupon, setProduct, setProductQuantity } from "./appData.js";
 import handleBuy from "./handleBuy.js";
 import handleProductProperties from "./handleProductProperties.js";
 
-const handleNoCart = ({ properties, products, productIds }) => {
+const handleNoCart = ({ properties, products, productIds, country }) => {
   if (properties) {
     if (properties.couponCode) setCoupon(properties.couponCode);
     if (properties.productIds) {
@@ -16,7 +16,7 @@ const handleNoCart = ({ properties, products, productIds }) => {
     setProduct({ productId: product.id })
     if (product.quantity) setProductQuantity({ productId: product.id, productQuantity: product.quantity });
   });
-  handleBuy();
+  handleBuy(country);
 };
 
 export default handleNoCart;
