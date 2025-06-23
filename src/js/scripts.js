@@ -1,4 +1,4 @@
-import { setCoupon } from "./modules/appData.js";
+import { resetProducts, setCoupon } from "./modules/appData.js";
 import createCart from "./modules/createCart.js";
 import fetchProducts from "./modules/fetchProducts.js";
 import handleBuy from "./modules/handleBuy.js";
@@ -13,6 +13,8 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => 
   window.addEventListener("pageshow", function (event) {
     if (event.persisted) {
       document.body.classList.remove("loading");
+      resetProducts();
+      setCoupon("");
     }
   });
   try {
@@ -29,7 +31,7 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => 
     buttons.forEach((button) => {
       button.addEventListener("click", async () => {
         setCoupon(couponCode);
-        const properties = JSON.parse(button.getAttribute("cart-button").replaceAll("'",'"') || null);
+        const properties = JSON.parse(button.getAttribute("cart-button").replaceAll("'", '"') || null);
         if (noCart || (properties && properties.noCart)) handleNoCart({ properties, products, productIds });
         else handleCart({ properties, products, productIds, inCartContainer, cartWrapper });
       });
