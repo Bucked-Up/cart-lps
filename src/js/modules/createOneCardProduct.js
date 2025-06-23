@@ -32,6 +32,7 @@ const handleSelectionVisibility = ({ placeholders, variantSelection }) => {
 };
 
 const createOneCardProduct = ({ option, product, inCartContainer }) => {
+  document.querySelector("[cart-qtty]").innerHTML = +document.querySelector("[cart-qtty]").innerHTML + (product.quantity || 1);
   setProduct({ productId: product.id });
   setProductType({ productId: product.id, productType: "oneCard" });
   setProductQuantity({ productId: product.id, productQuantity: product.quantity });
