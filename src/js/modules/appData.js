@@ -22,6 +22,7 @@ const setProductQuantity = ({ productId, productQuantity }) => {
   if (!products[productId]) products[productId] = {};
   products[productId].quantity = productQuantity;
 };
+const getProductQuantity = ({ productId }) => products[productId].quantity;
 const setProductValues = ({ productId, optionId, value }) => {
   if (!products[productId].options) products[productId].options = {};
   if (!products[productId].options[optionId]) products[productId].options[optionId] = {};
@@ -40,4 +41,4 @@ const resetProducts = () => {
   products = {};
 };
 
-export { getProducts, getCoupon, setCoupon, setProduct, setProductType, setProductQuantity, setProductValues, removeProductValue, deleteProductOption, resetProducts };
+export { getProducts, getCoupon, getProductQuantity, setCoupon, setProduct, setProductType, setProductQuantity, setProductValues, removeProductValue, deleteProductOption, resetProducts };

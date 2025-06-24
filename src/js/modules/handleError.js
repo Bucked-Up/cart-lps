@@ -5,4 +5,4 @@ const handleError = () => {
   }, 3000);
 };
 
-export default handleError
+export default handleError;

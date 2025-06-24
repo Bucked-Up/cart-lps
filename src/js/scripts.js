@@ -1,6 +1,7 @@
 import { resetProducts, setCoupon } from "./modules/appData.js";
 import createCart from "./modules/createCart.js";
 import fetchProducts from "./modules/fetchProducts.js";
+import handleBump from "./modules/handleBump.js";
 import handleBuy from "./modules/handleBuy.js";
 import handleCart from "./modules/handleCart.js";
 import handleError from "./modules/handleError.js";
@@ -9,7 +10,7 @@ import handleIntellimize from "./modules/intellimize.js";
 import setCookies from "./modules/setCookies.js";
 import toggleLoading from "./modules/toggleLoading.js";
 
-const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => {
+const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump }) => {
   window.addEventListener("pageshow", function (event) {
     if (event.persisted) {
       document.body.classList.remove("loading");
@@ -24,7 +25,7 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => 
     handleIntellimize();
     setCookies({ couponCode, pageId: pageData.pageId });
 
-    const [cartWrapper, inCartContainer, buyButton] = createCart();
+    const [cartWrapper, inCartContainer, cartOrderBumpsContainer, buyButton] = createCart();
     document.body.appendChild(cartWrapper);
 
     const buttons = document.querySelectorAll("[cart-button]");
@@ -36,7 +37,7 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode }) => 
         else handleCart({ properties, products, productIds, inCartContainer, cartWrapper });
       });
     });
-
+    handleBump(bump, couponCode, cartOrderBumpsContainer, inCartContainer);
     buyButton.addEventListener("click", () => handleBuy(country));
     toggleLoading();
   } catch (e) {

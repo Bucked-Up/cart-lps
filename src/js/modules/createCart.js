@@ -7,6 +7,8 @@ const createCart = () => {
   const cartHead = document.createElement("div");
   const cartProdContainer = document.createElement("div");
   const cartInCartContainer = document.createElement("div");
+  const cartOrderBumpsContainer = document.createElement("div");
+  const cartTitleDiv = document.createElement("div");
   const cartFoot = document.createElement("div");
   const buyButton = document.createElement("button");
   buyButton.innerHTML = "BUY NOW";
@@ -16,6 +18,7 @@ const createCart = () => {
   const cartTitle = document.createElement("p");
   cartTitle.innerHTML = "SHOPPING CART (<span cart-qtty></span>)";
   const closeButton = document.createElement("button");
+  cartTitleDiv.innerHTML = "<p>YOU MAY ALSO LIKE</p>";
 
   cartWrapper.classList.add("cart-wrapper");
   cartOverlay.classList.add("cart-overlay");
@@ -26,6 +29,8 @@ const createCart = () => {
   cartTitle.classList.add("cart__head__title");
   cartProdContainer.classList.add("cart__prod-container");
   cartInCartContainer.classList.add("cart__in-cart-container");
+  cartOrderBumpsContainer.classList.add("cart__order-bumps-container");
+  cartTitleDiv.classList.add("cart__title-div");
   cartFoot.classList.add("cart__foot");
   buyButton.classList.add("buy-button");
 
@@ -34,7 +39,9 @@ const createCart = () => {
   cart.appendChild(cartHead);
   cart.appendChild(cartProdContainer);
   cart.appendChild(cartFoot);
+  cartOrderBumpsContainer.appendChild(cartTitleDiv)
   cartProdContainer.appendChild(cartInCartContainer);
+  cartProdContainer.appendChild(cartOrderBumpsContainer);
   cartHead.appendChild(cartIcon);
   cartHead.appendChild(cartTitle);
   cartHead.appendChild(closeButton);
@@ -49,7 +56,7 @@ const createCart = () => {
     });
   });
 
-  return [cartWrapper, cartInCartContainer, buyButton];
+  return [cartWrapper, cartInCartContainer, cartOrderBumpsContainer, buyButton];
 };
 
 export default createCart;
