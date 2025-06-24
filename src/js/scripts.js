@@ -37,7 +37,7 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump 
         else handleCart({ properties, products, productIds, inCartContainer, cartWrapper });
       });
     });
-    handleBump(bump, couponCode, cartOrderBumpsContainer, inCartContainer);
+    if (bump) handleBump(bump, couponCode, cartOrderBumpsContainer, inCartContainer);
     buyButton.addEventListener("click", () => handleBuy(country));
     toggleLoading();
   } catch (e) {
