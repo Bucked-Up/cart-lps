@@ -1,5 +1,21 @@
 import sendViewedProducts from "./sendViewedProducts.js";
 
+const handleCustomVariants = (data, productIds) => {
+  const givenOptions = productIds.find((el) => el.id == data.product.id);
+  if (givenOptions.customVariants) {
+    givenOptions.customVariants.forEach((customVariant, i) => {
+      data.product.options
+        .find((option) => option.id === customVariant.optionId)
+        .values.push({
+          id: `custom-${i}`,
+          name: customVariant.name,
+          images: [customVariant.image],
+        });
+      data.product.stock[`[custom-${i}]`] = 0;
+    });
+  }
+};
+
 const fetchProducts = async ({ country, productIds }) => {
   const ids = productIds.map((el) => el.id);
   const fetchApi = async (id) => {
@@ -11,6 +27,7 @@ const fetchProducts = async ({ country, productIds }) => {
       if (response.status === 404) throw new Error(`Product ${id} Not Found.`);
       if (response.status == 500 || response.status == 400) throw new Error("Sorry, there was a problem.");
       const data = await response.json();
+      handleCustomVariants(data, productIds);
       return data;
     } catch (error) {
       return Promise.reject(error);
