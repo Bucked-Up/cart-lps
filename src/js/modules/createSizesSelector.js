@@ -44,7 +44,7 @@ const createSizesSelector = ({ product, option }) => {
       setProduct({ productId: product.id, optionId: option.id, valueId: value.id });
     });
     if (price) {
-      price = price.split("(")[0];
+      price = price.split("(")[0].replaceAll(")","");
       const labelPrice = document.createElement("span");
       labelPrice.classList.add("label-price");
       labelPrice.innerHTML = price;

@@ -69,6 +69,12 @@ It receives an object with the following properties:
       The variant's name (such as "Large" or "Red").
     - image  
       A URL for the variant's image.
+  - forceSingleOption  
+    An object to lock a specific option and value for this product. Contains:
+    - optionId  
+      The unique identifier of the option to force.
+    - valueId  
+      The specific value to assign to that option.
 
 - bump (optional)  
   An optional object for additional offers or upsells. Can have:

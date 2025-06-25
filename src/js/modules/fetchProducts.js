@@ -1,3 +1,4 @@
+import { setProductOptionValue } from "./appData.js";
 import sendViewedProducts from "./sendViewedProducts.js";
 
 const handleCustomVariants = (data, productIds) => {
@@ -16,6 +17,25 @@ const handleCustomVariants = (data, productIds) => {
   }
 };
 
+const handleForceSingleOption = (data, productIds) => {
+  const givenOptions = productIds.find((el) => el.id == data.product.id);
+  if (givenOptions.forceSingleOption) {
+    const optionId = givenOptions.forceSingleOption.optionId;
+    const valueId = givenOptions.forceSingleOption.valueId;
+    Object.keys(data.product.stock).forEach((key) => {
+      if (!key.includes(`${valueId}`)) delete data.product.stock[key];
+      else {
+        const stockValue = data.product.stock[key];
+        const newKey = key.replace(valueId, "").replace(",", "");
+        delete data.product.stock[key];
+        data.product.stock[newKey] = stockValue;
+      }
+    });
+    data.product.options = data.product.options.filter((option) => option.id !== optionId);
+    setProductOptionValue({ productId: data.product.id, optionId, valueId });
+  }
+};
+
 const fetchProducts = async ({ country, productIds }) => {
   const ids = productIds.map((el) => el.id);
   const fetchApi = async (id) => {
@@ -28,6 +48,7 @@ const fetchProducts = async ({ country, productIds }) => {
       if (response.status == 500 || response.status == 400) throw new Error("Sorry, there was a problem.");
       const data = await response.json();
       handleCustomVariants(data, productIds);
+      handleForceSingleOption(data, productIds);
       return data;
     } catch (error) {
       return Promise.reject(error);
