@@ -7,13 +7,13 @@ import createStaticProduct from "./createStaticProduct.js";
 import isDependent from "./isDependent.js";
 import isStatic from "./isStatic.js";
 
-const createProducts = ({ products, inCartContainer, cartWrapper }) => {
-  cartWrapper.classList.add("active");
+const createProducts = ({ products, inCartContainer, cartWrapper, isBump }) => {
+  cartWrapper?.classList.add("active");
 
   products.forEach((product) => {
-    if (isDependent(product)) inCartContainer.appendChild(createDependentProduct({ product }));
+    if (isDependent(product)) inCartContainer.appendChild(createDependentProduct({ product, isBump }));
     else if (isStatic(product)) {
-      inCartContainer.appendChild(createStaticProduct({ product }));
+      inCartContainer.appendChild(createStaticProduct({ product, isBump }));
       setProduct({ productId: product.id });
     } else {
       if (product.quantity)
@@ -22,7 +22,7 @@ const createProducts = ({ products, inCartContainer, cartWrapper }) => {
         });
       else
         product.options.forEach((option) => {
-          inCartContainer.appendChild(createIndependentProduct({ product, option }));
+          inCartContainer.appendChild(createIndependentProduct({ product, option, isBump }));
         });
     }
     checkSizeStock({ product });

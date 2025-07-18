@@ -37,9 +37,11 @@ const handleForceSingleOption = (data, productIds) => {
 };
 
 const fetchProducts = async ({ country, productIds }) => {
+  if (!productIds) return;
   const ids = productIds.map((el) => el.id);
   const fetchApi = async (id) => {
     let url = `https://funnels.buckedup.com/product/json/detail?product_id=${id}`;
+    // let url = `https://webhook-processor-production-4aa3.up.railway.app/webhook/dev?product_id=${id}`;
     if (country && country !== "us") url = url + `?country=${country}`;
     try {
       const response = await fetch(url);
