@@ -49,7 +49,9 @@ const deleteProductOption = ({ productId, optionId }) => {
 };
 
 const resetProducts = () => {
-  products = {};
+  for(let key in products){
+    if(!products[key].isBump) delete products[key]
+  }
 };
 
 export { getProducts, getCoupon, getProductQuantity, setCoupon, setProduct, setProductType, setProductAsBump, setProductQuantity, setProductValues, setProductOptionValue, removeProductValue, removeProductAsBump, deleteProductOption, resetProducts };
