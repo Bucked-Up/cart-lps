@@ -15,6 +15,7 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump 
   window.addEventListener("pageshow", function (event) {
     if (event.persisted) {
       document.body.classList.remove("loading");
+      document.querySelector(".cart-wrapper").classList.remove("active")
       resetProducts();
       setCoupon("");
     }
