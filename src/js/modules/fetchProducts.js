@@ -39,7 +39,7 @@ const handleForceSingleOption = (data, productIds) => {
 const fetchProducts = async ({ country, productIds }) => {
   const ids = productIds.map((el) => el.id);
   const fetchApi = async (id) => {
-    let url = `https://www.buckedup.com/product/json/detail?product_id=${id}`;
+    let url = `https://funnels.buckedup.com/product/json/detail?product_id=${id}`;
     // let url = `https://ar5vgv5qw5.execute-api.us-east-1.amazonaws.com/list/${id}`;
     if (country && country !== "us") url = url + `?country=${country}`;
     try {
