@@ -18,9 +18,6 @@ const setProductType = ({ productId, productType }) => {
   if (!products[productId]) products[productId] = {};
   products[productId].type = productType;
 };
-const setProductAsBump = ({ productId }) => {
-  products[productId].isBump = true;
-};
 const setProductQuantity = ({ productId, productQuantity }) => {
   if (!products[productId]) products[productId] = {};
   products[productId].quantity = productQuantity;
@@ -41,17 +38,12 @@ const removeProductValue = ({ productId, optionId, value }) => {
   const values = products[productId].options[optionId].values;
   values.splice(values.indexOf(value), 1);
 };
-const removeProductAsBump = ({ productId }) => {
-  products[productId].isBump = false;
-};
 const deleteProductOption = ({ productId, optionId }) => {
   delete products[productId].options[optionId];
 };
 
 const resetProducts = () => {
-  for(let key in products){
-    if(!products[key].isBump) delete products[key]
-  }
+  products = {};
 };
 
-export { getProducts, getCoupon, getProductQuantity, setCoupon, setProduct, setProductType, setProductAsBump, setProductQuantity, setProductValues, setProductOptionValue, removeProductValue, removeProductAsBump, deleteProductOption, resetProducts };
+export { getProducts, getCoupon, getProductQuantity, setCoupon, setProduct, setProductType, setProductQuantity, setProductValues, setProductOptionValue, removeProductValue, deleteProductOption, resetProducts };

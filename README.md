@@ -80,25 +80,19 @@ It receives an object with the following properties:
   An optional object for additional offers or upsells. Can have:
 
   - type  
-    Determines the bump type
+    Determines the bump type (just quantity atm)
   - ids  
     A list of product IDs included in the bump.
-  - if type quantity:
-
-    - quantity  
-      The number of items in the bump.
-    - name  
-      The bump's name.
-    - image  
-      A URL of an image illustrating the bump.
-    - price  
-      The bump's offer price.
-    - couponCode  
-      A coupon code applied only to the bump.
-  
-  - if type product: 
-
-    - exemple: ids: [{ id: 999, title: "testtitle", bumpPrice: "12.60", couponCode: "coupon" }],
+  - quantity  
+    The number of items in the bump.
+  - name  
+    The bump's name.
+  - image  
+    A URL of an image illustrating the bump.
+  - price  
+    The bump's offer price.
+  - couponCode  
+    A coupon code applied only to the bump.
 
 - couponCode  
   The discount code to apply to the cart.

@@ -1,11 +1,10 @@
 import { setProductType } from "./appData.js";
-import createBumpButtons from "./createBumpButtons.js";
 import createDropdownSelector from "./createDropdownSelector.js";
 import createProductBase from "./createProductBase.js";
 import createSizesSelector from "./createSizesSelector.js";
 
-const createDependentProduct = ({ product, isBump }) => {
-  document.querySelector("[cart-qtty]").innerHTML = +document.querySelector("[cart-qtty]").innerHTML + 1;
+const createDependentProduct = ({ product }) => {
+  document.querySelector("[cart-qtty]").innerHTML = +document.querySelector("[cart-qtty]").innerHTML+1
   const [card, image, imageWrapper, productTitle, optionTitle, productInfoWrapper] = createProductBase();
   image.src = product.options[0].values[0].images[0];
   productTitle.innerHTML = product.name;
@@ -14,9 +13,6 @@ const createDependentProduct = ({ product, isBump }) => {
   const sizesSelector = createSizesSelector({ product, option: product.options[1] });
   productInfoWrapper.appendChild(cartDropdown);
   productInfoWrapper.appendChild(sizesSelector);
-  if (isBump) {
-    createBumpButtons({ price: product.bumpPrice, productInfoWrapper, productId: product.id, card, couponCode: product.couponCode });
-  }
   return card;
 };
 
