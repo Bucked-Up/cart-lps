@@ -50,7 +50,8 @@ const deleteProductOption = ({ productId, optionId }) => {
 
 const resetProducts = () => {
   for(let key in products){
-    if(!products[key].isBump) delete products[key]
+    if(products[key].hasOwnProperty('isBump')) products[key].isBump = true;
+    else delete products[key]
   }
 };
 
