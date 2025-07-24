@@ -10,15 +10,13 @@ import handleIntellimize from "./modules/intellimize.js";
 import setCookies from "./modules/setCookies.js";
 import toggleLoading from "./modules/toggleLoading.js";
 import handleProductBump from "./modules/handleProductBump.js";
+import closeCart from "./modules/closeCart.js";
 
 const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump }) => {
   window.addEventListener("pageshow", function (event) {
     if (event.persisted) {
       document.body.classList.remove("loading");
-      document.querySelector(".cart-wrapper").classList.remove("active");
-      document.querySelector(".cart__in-cart-container").innerHTML = "";
-      resetProducts();
-      setCoupon("");
+      closeCart();
     }
   });
   try {

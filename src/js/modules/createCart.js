@@ -1,4 +1,5 @@
 import { resetProducts } from "./appData.js";
+import closeCart from "./closeCart.js";
 
 const createCart = () => {
   const cartWrapper = document.createElement("div");
@@ -48,12 +49,7 @@ const createCart = () => {
   cartFoot.appendChild(buyButton);
 
   [cartOverlay, closeButton].forEach((el) => {
-    el.addEventListener("click", () => {
-      cartWrapper.classList.toggle("active");
-      document.body.classList.toggle("no-scroll");
-      cartInCartContainer.innerHTML = "";
-      resetProducts();
-    });
+    el.addEventListener("click", closeCart);
   });
 
   return [cartWrapper, cartInCartContainer, cartOrderBumpsContainer, buyButton];
