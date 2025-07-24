@@ -1,7 +1,7 @@
 import { resetProducts, setCoupon } from "./modules/appData.js";
 import createCart from "./modules/createCart.js";
 import fetchProducts from "./modules/fetchProducts.js";
-import handleBump from "./modules/handleBump.js";
+import handleQuantityBump from "./modules/handleQuantityBump.js";
 import handleBuy from "./modules/handleBuy.js";
 import handleCart from "./modules/handleCart.js";
 import handleError from "./modules/handleError.js";
@@ -9,18 +9,20 @@ import handleNoCart from "./modules/handleNoCart.js";
 import handleIntellimize from "./modules/intellimize.js";
 import setCookies from "./modules/setCookies.js";
 import toggleLoading from "./modules/toggleLoading.js";
+import handleProductBump from "./modules/handleProductBump.js";
 
 const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump }) => {
   window.addEventListener("pageshow", function (event) {
     if (event.persisted) {
       document.body.classList.remove("loading");
+      document.querySelector(".cart-wrapper").classList.remove("active")
       resetProducts();
       setCoupon("");
     }
   });
   try {
     toggleLoading();
-    const products = await fetchProducts({ productIds, country });
+    const [products, bumpProducts] = await Promise.all([fetchProducts({ productIds, country }), fetchProducts({ productIds: (bump?.type === "product" && bump?.ids), country })]);
     if (products.some((product) => Object.keys(product.stock).every((key) => product.stock[key] <= 0))) throw new Error("Out of stock products.");
     handleIntellimize();
     setCookies({ couponCode, pageId: pageData.pageId });
@@ -37,7 +39,8 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump 
         else handleCart({ properties, products, productIds, inCartContainer, cartWrapper });
       });
     });
-    if (bump) handleBump(bump, couponCode, cartOrderBumpsContainer, inCartContainer);
+    if (bump?.type === "quantity") handleQuantityBump(bump, cartOrderBumpsContainer, inCartContainer);
+    else if (bump?.type === "product") handleProductBump(bump, bumpProducts, cartOrderBumpsContainer);
     buyButton.addEventListener("click", () => handleBuy(country));
     toggleLoading();
   } catch (e) {

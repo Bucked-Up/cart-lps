@@ -9,6 +9,7 @@ const handleBuy = (country) => {
   let string = "";
   let i = 0;
   for (let prodId in products) {
+    if (products[prodId].isBump) continue;
     if (products[prodId].type === "oneCard" && (!products[prodId].options || products[prodId].options[Object.keys(products[prodId].options)[0]].values.length < products[prodId].quantity)) {
       document.querySelector(`[variants-selector='${prodId}']`).classList.add("shake");
       return;

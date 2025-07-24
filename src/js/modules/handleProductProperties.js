@@ -5,6 +5,8 @@ const handleProductProperties = (products, properties) => {
     if (property.title) product.name = property.title;
     if (property.quantity) product.quantity = property.quantity;
     else delete product.quantity;
+    if(property.bumpPrice) product.bumpPrice = property.bumpPrice
+    if(property.couponCode) product.couponCode = property.couponCode
   });
 };
 
