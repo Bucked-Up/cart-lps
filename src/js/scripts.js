@@ -15,14 +15,15 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump 
   window.addEventListener("pageshow", function (event) {
     if (event.persisted) {
       document.body.classList.remove("loading");
-      document.querySelector(".cart-wrapper").classList.remove("active")
+      document.querySelector(".cart-wrapper").classList.remove("active");
+      document.querySelector(".cart__in-cart-container").innerHTML = "";
       resetProducts();
       setCoupon("");
     }
   });
   try {
     toggleLoading();
-    const [products, bumpProducts] = await Promise.all([fetchProducts({ productIds, country }), fetchProducts({ productIds: (bump?.type === "product" && bump?.ids), country })]);
+    const [products, bumpProducts] = await Promise.all([fetchProducts({ productIds, country }), fetchProducts({ productIds: bump?.type === "product" && bump?.ids, country })]);
     if (products.some((product) => Object.keys(product.stock).every((key) => product.stock[key] <= 0))) throw new Error("Out of stock products.");
     handleIntellimize();
     setCookies({ couponCode, pageId: pageData.pageId });
