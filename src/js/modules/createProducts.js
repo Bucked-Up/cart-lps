@@ -1,4 +1,4 @@
-import { setProduct } from "./appData.js";
+import { setProduct, setProductOptionValue, setProductType } from "./appData.js";
 import checkSizeStock from "./checkSizeStock.js";
 import createDependentProduct from "./createDependentProduct.js";
 import createIndependentProduct from "./createIndependentProduct.js";
@@ -15,6 +15,10 @@ const createProducts = ({ products, inCartContainer, cartWrapper, isBump }) => {
     else if (isStatic(product)) {
       inCartContainer.appendChild(createStaticProduct({ product, isBump }));
       setProduct({ productId: product.id });
+      if (product.hasSetVariant) {
+        setProductType({productId: product.id, productType: "has-set-variant"});
+        setProductOptionValue({ productId: product.id, optionId: product.hasSetVariant[0], valueId: product.hasSetVariant[1] });
+      }
     } else {
       if (product.quantity)
         product.options.forEach((option) => {

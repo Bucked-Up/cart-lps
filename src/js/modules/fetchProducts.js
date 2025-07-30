@@ -17,6 +17,19 @@ const handleCustomVariants = (data, productIds) => {
   }
 };
 
+const handleSelectedVariant = (data, productIds) => {
+  const givenOptions = productIds.find((el) => el.id == data.product.id);
+  if (givenOptions.variant) {
+    const newStock = {};
+    const option = data.product.options.find((option) => option.id === givenOptions.variant[0]);
+    option.values = option.values.filter((value) => value.id === givenOptions.variant[1]);
+    newStock[givenOptions.variant[1]] = data.product.stock[`[${givenOptions.variant[1]}]`];
+    data.product.stock = newStock;
+    data.product.hasSetVariant = givenOptions.variant;
+    data.product.image = data.product.options[0].values[0].images[0];
+  }
+};
+
 const handleForceSingleOption = (data, productIds) => {
   const givenOptions = productIds.find((el) => el.id == data.product.id);
   if (givenOptions.forceSingleOption) {
@@ -50,6 +63,7 @@ const fetchProducts = async ({ country, productIds }) => {
       const data = await response.json();
       handleCustomVariants(data, productIds);
       handleForceSingleOption(data, productIds);
+      handleSelectedVariant(data, productIds);
       return data;
     } catch (error) {
       return Promise.reject(error);

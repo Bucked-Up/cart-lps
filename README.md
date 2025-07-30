@@ -61,6 +61,8 @@ It receives an object with the following properties:
     The number of units to add.
   - title  
     The product's name.
+  - variant
+    a key-pair array, with 0 being the option id, and 1 being the value id. ex: variant: [999,98797]
   - customVariants  
     An array listing custom variants for the product.
     - optionId  
