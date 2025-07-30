@@ -6,7 +6,6 @@ import handleBuy from "./modules/handleBuy.js";
 import handleCart from "./modules/handleCart.js";
 import handleError from "./modules/handleError.js";
 import handleNoCart from "./modules/handleNoCart.js";
-import handleIntellimize from "./modules/intellimize.js";
 import setCookies from "./modules/setCookies.js";
 import toggleLoading from "./modules/toggleLoading.js";
 import handleProductBump from "./modules/handleProductBump.js";
@@ -23,7 +22,7 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump 
     toggleLoading();
     const [products, bumpProducts] = await Promise.all([fetchProducts({ productIds, country }), fetchProducts({ productIds: bump?.type === "product" && bump?.ids, country })]);
     if (products.some((product) => Object.keys(product.stock).every((key) => product.stock[key] <= 0))) throw new Error("Out of stock products.");
-    handleIntellimize();
+    // handleIntellimize();
     setCookies({ couponCode, pageId: pageData.pageId });
 
     const [cartWrapper, inCartContainer, cartOrderBumpsContainer, buyButton] = createCart();

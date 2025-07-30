@@ -25,7 +25,6 @@ const handleSelectedVariant = (data, productIds) => {
     option.values = option.values.filter((value) => value.id === givenOptions.variant[1]);
     newStock[givenOptions.variant[1]] = data.product.stock[`[${givenOptions.variant[1]}]`];
     data.product.stock = newStock;
-    data.product.hasSetVariant = givenOptions.variant;
     data.product.image = data.product.options[0].values[0].images[0];
   }
 };
