@@ -1,3 +1,4 @@
+import addQuantitySelector from "./addQuantitySelector.js";
 import addRemoveButton from "./addRemoveButton.js";
 import { setProductType } from "./appData.js";
 import createBumpButtons from "./createBumpButtons.js";
@@ -20,6 +21,7 @@ const createDependentProduct = ({ product, isBump }) => {
   if (isBump) {
     createBumpButtons({ price: product.bumpPrice, productInfoWrapper, productId: product.id, card, couponCode: product.couponCode });
   }
+  addQuantitySelector({wrapper: productInfoWrapper, product})
   return card;
 };
 

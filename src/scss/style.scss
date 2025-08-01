@@ -115,13 +115,13 @@
     padding: 0 0.3rem 0 0;
     height: 100%;
   }
-  &__title-wrapper{
+  &__title-wrapper {
     display: flex;
     width: 100%;
-    max-width: 11.875rem;
     align-items: center;
-    justify-content: space-between;
-    svg{
+    gap: 6px;
+    // justify-content: space-between;
+    svg {
       display: block;
     }
   }
@@ -569,6 +569,8 @@
       display: flex;
       cursor: pointer;
       transition: 0.3s;
+      width: 24px;
+      height: 24px;
       &:hover,
       &:focus {
         transform: scale(1.1);
@@ -578,6 +580,8 @@
       }
       svg {
         fill: white;
+        width: 24px !important;
+        height: 24px !important;
       }
     }
     input {
@@ -587,8 +591,10 @@
       font-weight: 700;
       font-family: Poppins;
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 1rem;
       appearance: none;
+      padding:0px;
+      height: 24px;
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
         appearance: none;
@@ -681,9 +687,9 @@
       fill: red;
     }
   }
-  .continue-shopping-button{
-    padding:0;
-    border:0;
+  .continue-shopping-button {
+    padding: 0;
+    border: 0;
     background: none;
     font-family: Poppins;
     font-weight: 600;
@@ -707,21 +713,21 @@
   height: 3.8rem;
   z-index: 9997;
   cursor: pointer;
-  svg{
+  svg {
     width: 75%;
   }
-  span{
+  span {
     position: absolute;
     width: 1.5625rem;
     height: 1.5625rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    top:-0.45rem;
+    top: -0.45rem;
     right: -0.45rem;
     background-color: white;
     border-radius: 50%;
-    padding:0.1rem;
+    padding: 0.1rem;
     background-color: #435ebe;
     color: white;
     font-size: 1rem;
@@ -731,10 +737,10 @@
     fill: white;
   }
   transition: transform 0.2s;
-  &:hover{
+  &:hover {
     transform: scale(1.1);
   }
-  &:active{
+  &:active {
     transform: scale(0.9);
   }
 }
@@ -783,12 +789,20 @@
 }
 
 @keyframes bounce {
-  from, to { transform: scale(1); }
-  25% { transform: scale(0.9); }
-  50% { transform: scale(1.1); }
-  75% { transform: scale(0.95); }
+  from,
+  to {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  75% {
+    transform: scale(0.95);
+  }
 }
-
 
 .selection-container {
   display: flex;
