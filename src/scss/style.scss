@@ -115,6 +115,16 @@
     padding: 0 0.3rem 0 0;
     height: 100%;
   }
+  &__title-wrapper{
+    display: flex;
+    width: 100%;
+    max-width: 11.875rem;
+    align-items: center;
+    justify-content: space-between;
+    svg{
+      display: block;
+    }
+  }
   &__title-div {
     position: relative;
     margin: 0.625rem 0 0 0;
@@ -160,6 +170,7 @@
     // }
   }
   &__product {
+    position: relative;
     padding: 1rem;
     line-height: 1;
     background-color: #f8f8fc;
@@ -545,45 +556,46 @@
       }
     }
   }
-  // .qtty-wrapper {
-  //   display: flex;
-  //   gap: 0.5rem;
-  //   button {
-  //     padding: 0;
-  //     margin: 0;
-  //     border: none;
-  //     background: #c2c4c7;
-  //     border-radius: 50%;
-  //     display: flex;
-  //     cursor: pointer;
-  //     transition: 0.3s;
-  //     &:hover,
-  //     &:focus {
-  //       transform: scale(1.1);
-  //     }
-  //     &:active {
-  //       transform: scale(0.9);
-  //     }
-  //     svg {
-  //       fill: white;
-  //     }
-  //   }
-  //   input {
-  //     max-width: 2rem;
-  //     border: 0.0625rem solid #c2c4c7;
-  //     border-radius: 0.1875rem;
-  //     font-weight: 700;
-  //     font-family: Poppins;
-  //     text-align: center;
-  //     font-size: 0.8rem;
-  //     appearance: none;
-  //     &::-webkit-outer-spin-button,
-  //     &::-webkit-inner-spin-button {
-  //       appearance: none;
-  //       margin: 0;
-  //     }
-  //   }
-  // }
+  .qtty-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 8px;
+    button {
+      padding: 0;
+      margin: 0;
+      border: none;
+      background: #b4b5b8;
+      border-radius: 50%;
+      display: flex;
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover,
+      &:focus {
+        transform: scale(1.1);
+      }
+      &:active {
+        transform: scale(0.9);
+      }
+      svg {
+        fill: white;
+      }
+    }
+    input {
+      max-width: 2rem;
+      border: 0.0625rem solid #c2c4c7;
+      border-radius: 0.1875rem;
+      font-weight: 700;
+      font-family: Poppins;
+      text-align: center;
+      font-size: 0.8rem;
+      appearance: none;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        appearance: none;
+        margin: 0;
+      }
+    }
+  }
   &__foot {
     width: calc(100% + 1rem);
     margin-left: -0.5rem;
@@ -618,7 +630,8 @@
     //   line-height: 1;
     // }
   }
-  .add-button,.remove-button{
+  .add-button,
+  .remove-button {
     margin-top: 8px;
   }
   .buy-button,
@@ -653,6 +666,76 @@
     background: #435ebe;
     font-size: 0.875rem;
     display: none;
+  }
+  .remove-product-button {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    width: 1rem;
+    cursor: pointer;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 1;
+    svg {
+      fill: red;
+    }
+  }
+  .continue-shopping-button{
+    padding:0;
+    border:0;
+    background: none;
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 14px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+}
+.dynamic-cart-button {
+  border-radius: 50%;
+  background-color: white;
+  border: none;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: #435ebe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.8rem;
+  height: 3.8rem;
+  z-index: 9997;
+  cursor: pointer;
+  svg{
+    width: 75%;
+  }
+  span{
+    position: absolute;
+    width: 1.5625rem;
+    height: 1.5625rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top:-0.45rem;
+    right: -0.45rem;
+    background-color: white;
+    border-radius: 50%;
+    padding:0.1rem;
+    background-color: #435ebe;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  svg {
+    fill: white;
+  }
+  transition: transform 0.2s;
+  &:hover{
+    transform: scale(1.1);
+  }
+  &:active{
+    transform: scale(0.9);
   }
 }
 
@@ -698,6 +781,15 @@
     transform: translateX(0);
   }
 }
+
+@keyframes bounce {
+  from, to { transform: scale(1); }
+  25% { transform: scale(0.9); }
+  50% { transform: scale(1.1); }
+  75% { transform: scale(0.95); }
+}
+
+
 .selection-container {
   display: flex;
 }

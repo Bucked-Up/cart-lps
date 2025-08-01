@@ -1,8 +1,11 @@
 let products = {};
+let properties = {};
 let couponCode = "";
 
 const getProducts = () => products;
 const getCoupon = () => couponCode;
+const getProperties = () => properties;
+const setProperties = (newProperties) => (properties = newProperties);
 const setCoupon = (coupon) => (couponCode = coupon);
 const setProduct = ({ productId, optionId, valueId }) => {
   if (!optionId) {
@@ -37,6 +40,9 @@ const setProductValues = ({ productId, optionId, value }) => {
   if (!products[productId].options[optionId].values) products[productId].options[optionId].values = [];
   products[productId].options[optionId].values.push(value);
 };
+const removeProduct = ({ productId }) => {
+  delete products[productId];
+};
 const removeProductValue = ({ productId, optionId, value }) => {
   const values = products[productId].options[optionId].values;
   values.splice(values.indexOf(value), 1);
@@ -49,10 +55,10 @@ const deleteProductOption = ({ productId, optionId }) => {
 };
 
 const resetProducts = () => {
-  for(let key in products){
-    if(products[key].hasOwnProperty('isBump')) products[key].isBump = true;
-    else delete products[key]
+  for (let key in products) {
+    if (products[key].hasOwnProperty("isBump")) products[key].isBump = true;
+    else delete products[key];
   }
 };
 
-export { getProducts, getCoupon, getProductQuantity, setCoupon, setProduct, setProductType, setProductAsBump, setProductQuantity, setProductValues, setProductOptionValue, removeProductValue, removeProductAsBump, deleteProductOption, resetProducts };
+export { getProducts, getCoupon, getProductQuantity, getProperties, setProperties, setCoupon, setProduct, setProductType, setProductAsBump, setProductQuantity, setProductValues, setProductOptionValue, removeProduct, removeProductValue, removeProductAsBump, deleteProductOption, resetProducts };

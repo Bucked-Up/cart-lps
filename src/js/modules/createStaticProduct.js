@@ -1,10 +1,15 @@
+import addQuantitySelector from "./addQuantitySelector.js";
+import addRemoveButton from "./addRemoveButton.js";
 import { setProductQuantity } from "./appData.js";
 import createBumpButtons from "./createBumpButtons.js";
 import createProductBase from "./createProductBase.js";
+import updateDomQuantities from "./updateDomQuantities.js";
 
 const createStaticProduct = ({ product, isBump }) => {
-  document.querySelector("[cart-qtty]").innerHTML = +document.querySelector("[cart-qtty]").innerHTML + (product.quantity || 1);
+  updateDomQuantities(product.quantity || 1)
   const [card, image, imageWrapper, productTitle, optionTitle, productInfoWrapper] = createProductBase();
+  addQuantitySelector({ wrapper: optionTitle, product });
+  addRemoveButton({ card, product });
   productTitle.innerHTML = product.name;
   image.alt = product.name;
   image.src = product.image;

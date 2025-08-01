@@ -21,7 +21,7 @@ const handleBuy = (country) => {
     if (products[prodId].type === "oneCard") {
       const firstOptionId = Object.keys(products[prodId].options)[0];
       for (let j = 0; j < products[prodId].quantity; j++) {
-        string = string + `&products[${i}][id]=${prodId}&products[${i}][quantity]=1&products[${i}][options][${firstOptionId}]=${products[prodId].options[firstOptionId].values[j]}`;
+        string = string + `&products[${i}][id]=${prodId.split("-")[0]}&products[${i}][quantity]=1&products[${i}][options][${firstOptionId}]=${products[prodId].options[firstOptionId].values[j]}`;
         i++;
       }
       continue;

@@ -1,4 +1,5 @@
 import { getCoupon, getProductQuantity, removeProductAsBump, setCoupon, setProductAsBump, setProductQuantity } from "./appData.js";
+import updateDomQuantities from "./updateDomQuantities.js";
 
 const createBumpButtons = ({ price, productInfoWrapper, productId, ids, card, couponCode, quantity }) => {
   const inCartContainer = document.querySelector(".cart__in-cart-container");
@@ -24,7 +25,7 @@ const createBumpButtons = ({ price, productInfoWrapper, productId, ids, card, co
     ogCoupon = getCoupon();
     setCoupon(couponCode);
     if (productId) {
-      document.querySelector("[cart-qtty]").innerHTML = +document.querySelector("[cart-qtty]").innerHTML + 1;
+      updateDomQuantities(1)
       removeProductAsBump({ productId });
     } else if (ids) {
       ids.forEach((id) => {
@@ -37,7 +38,7 @@ const createBumpButtons = ({ price, productInfoWrapper, productId, ids, card, co
     cartOrderBumpsContainer.appendChild(card);
     setCoupon(ogCoupon);
     if (productId) {
-      document.querySelector("[cart-qtty]").innerHTML = +document.querySelector("[cart-qtty]").innerHTML - 1;
+      updateDomQuantities(-1)
       setProductAsBump({ productId });
     } else if (ids) {
       ids.forEach((id) => {
