@@ -25,7 +25,8 @@ const addQuantitySelector = ({ wrapper, product }) => {
     const prevQuantity = getProductQuantity({ productId: product.id }) || 1;
     setProductQuantity({ productId: product.id, productQuantity: qttyInput.value });
     updateDomQuantities(qttyInput.value - prevQuantity);
-    updatePrices(product, "subtract", qttyInput.value - prevQuantity);
+    const action = qttyInput.value < prevQuantity ? "subtract" : "add"
+    updatePrices(product, action, Math.abs(qttyInput.value - prevQuantity));
   });
 
   plusBtn.addEventListener("click", () => {
