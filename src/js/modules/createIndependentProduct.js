@@ -4,6 +4,7 @@ import createProductBase from "./createProductBase.js";
 import addRemoveButton from "./addRemoveButton.js";
 import updateDomQuantities from "./updateDomQuantities.js";
 import addQuantitySelector from "./addQuantitySelector.js";
+import updatePrices from "./updatePrices.js";
 
 const createIndependentProduct = ({ product, option, isBump }) => {
   updateDomQuantities(1)
@@ -19,6 +20,7 @@ const createIndependentProduct = ({ product, option, isBump }) => {
     createBumpButtons({ price: product.bumpPrice, productInfoWrapper, productId: product.id, card, couponCode: product.couponCode });
   }
   addQuantitySelector({wrapper: productInfoWrapper, product})
+  updatePrices(product, "add");
   return card;
 };
 

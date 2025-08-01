@@ -1,5 +1,6 @@
 import { getProductQuantity, getProperties, setProductQuantity } from "./appData.js";
 import updateDomQuantities from "./updateDomQuantities.js";
+import updatePrices from "./updatePrices.js";
 
 const addQuantitySelector = ({ wrapper, product }) => {
   const { isDynamic } = getProperties();
@@ -17,23 +18,26 @@ const addQuantitySelector = ({ wrapper, product }) => {
   qttyInput.id = `qtty-${product.id}`;
   qttyInput.value = 1;
   qttyInput.type = "number";
-  qttyInput.setAttribute("qtty-input","")
+  qttyInput.setAttribute("qtty-input", "");
 
   qttyInput.addEventListener("focusout", () => {
     if (qttyInput.value <= 0) qttyInput.value = 1;
     const prevQuantity = getProductQuantity({ productId: product.id }) || 1;
     setProductQuantity({ productId: product.id, productQuantity: qttyInput.value });
-    updateDomQuantities(qttyInput.value - prevQuantity)
+    updateDomQuantities(qttyInput.value - prevQuantity);
+    updatePrices(product, "subtract", qttyInput.value - prevQuantity);
   });
 
   plusBtn.addEventListener("click", () => {
     updateDomQuantities(1);
+    updatePrices(product, "add");
     qttyInput.value = +qttyInput.value + 1;
     setProductQuantity({ productId: product.id, productQuantity: qttyInput.value });
   });
   minusBtn.addEventListener("click", () => {
     if (qttyInput.value > 1) {
       updateDomQuantities(-1);
+      updatePrices(product, "subtract");
       qttyInput.value = +qttyInput.value - 1;
       setProductQuantity({ productId: product.id, productQuantity: qttyInput.value });
     }

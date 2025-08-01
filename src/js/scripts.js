@@ -12,6 +12,7 @@ import handleProductBump from "./modules/handleProductBump.js";
 import closeCart from "./modules/closeCart.js";
 import createProducts from "./modules/createProducts.js";
 import createDynamicCartIcon from "./modules/createDynamicCartIcon.js";
+import handleProductProperties from "./modules/handleProductProperties.js";
 
 const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump, isDynamic }) => {
   window.addEventListener("pageshow", function (event) {
@@ -26,25 +27,25 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump,
     if (products.some((product) => Object.keys(product.stock).every((key) => product.stock[key] <= 0))) throw new Error("Out of stock products.");
     // handleIntellimize();
     setCookies({ couponCode, pageId: pageData.pageId });
-    setProperties({ noCart, country, pageData, productIds, couponCode, bump, isDynamic })
+    setProperties({ noCart, country, pageData, productIds, couponCode, bump, isDynamic });
 
     const [cartWrapper, inCartContainer, cartOrderBumpsContainer, buyButton] = createCart();
     document.body.appendChild(cartWrapper);
 
-    if (isDynamic){
+    if (isDynamic) {
       createDynamicCartIcon(cartWrapper);
       setCoupon(couponCode);
-    } 
+    }
 
     const buttons = document.querySelectorAll("[cart-button]");
     buttons.forEach((button) => {
       button.addEventListener("click", async () => {
         const properties = JSON.parse(button.getAttribute("cart-button").replaceAll("'", '"') || null);
-        if(isDynamic){
+        if (isDynamic) {
           const filteredProducts = products.filter((product) => properties.productIds.map((id) => id.id).includes(Number(product.id)));
-          createProducts({products: filteredProducts, inCartContainer, cartWrapper})
-        }
-        else{
+          handleProductProperties(filteredProducts, productIds);
+          createProducts({ products: filteredProducts, inCartContainer, cartWrapper });
+        } else {
           setCoupon(couponCode);
           if (noCart || (properties && properties.noCart)) handleNoCart({ properties, products, productIds, country });
           else handleCart({ properties, products, productIds, inCartContainer, cartWrapper });

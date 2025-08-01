@@ -6,9 +6,10 @@ import createDropdownSelector from "./createDropdownSelector.js";
 import createProductBase from "./createProductBase.js";
 import createSizesSelector from "./createSizesSelector.js";
 import updateDomQuantities from "./updateDomQuantities.js";
+import updatePrices from "./updatePrices.js";
 
 const createDependentProduct = ({ product, isBump }) => {
-  updateDomQuantities(1)
+  updateDomQuantities(1);
   const [card, image, imageWrapper, productTitle, optionTitle, productInfoWrapper] = createProductBase();
   addRemoveButton({ card, product });
   image.src = product.options[0].values[0].images[0];
@@ -21,7 +22,8 @@ const createDependentProduct = ({ product, isBump }) => {
   if (isBump) {
     createBumpButtons({ price: product.bumpPrice, productInfoWrapper, productId: product.id, card, couponCode: product.couponCode });
   }
-  addQuantitySelector({wrapper: productInfoWrapper, product})
+  addQuantitySelector({ wrapper: productInfoWrapper, product });
+  updatePrices(product, "add");
   return card;
 };
 

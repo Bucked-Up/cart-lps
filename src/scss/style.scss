@@ -608,33 +608,33 @@
     padding: 1rem;
     background-color: #ededed;
     margin-top: auto;
-    // &__price-div-wrapper {
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: space-between;
-    //   margin-bottom: 0.75rem;
-    // }
-    // &__total-text {
-    //   font-size: 1rem;
-    //   font-weight: 700;
-    // }
-    // &__price-div {
-    //   display: flex;
-    //   align-items: flex-end;
-    //   gap: 0.25rem;
-    // }
-    // &__old-price {
-    //   font-size: 0.9375rem;
-    //   font-weight: 700;
-    //   color: red;
-    //   text-decoration: line-through;
-    //   line-height: 1.2;
-    // }
-    // &__new-price {
-    //   font-size: 1.3rem;
-    //   font-weight: 700;
-    //   line-height: 1;
-    // }
+    &__price-div-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    &__total-text {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    &__price-div {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.25rem;
+    }
+    &__old-price {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: red;
+      text-decoration: line-through;
+      line-height: 1.2;
+    }
+    &__new-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1;
+    }
   }
   .add-button,
   .remove-button {
