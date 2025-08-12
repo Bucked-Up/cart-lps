@@ -105,7 +105,7 @@
     flex-direction: column;
     gap: 0.5rem;
     .add-button {
-      display: none;
+      display: none !important;
     }
     .remove-button {
       display: block !important;
