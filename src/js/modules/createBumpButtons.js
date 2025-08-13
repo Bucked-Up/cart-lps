@@ -1,4 +1,4 @@
-import { getCoupon, getProductQuantity, removeProductAsBump, setCoupon, setProductAsBump, setProductQuantity } from "./appData.js";
+import { getBumpCoupon, getCoupon, getProductQuantity, removeProductAsBump, setCoupon, setProductAsBump, setProductQuantity } from "./appData.js";
 
 const createBumpButtons = ({ price, productInfoWrapper, productId, ids, card, couponCode, quantity }) => {
   const inCartContainer = document.querySelector(".cart__in-cart-container");
@@ -22,7 +22,7 @@ const createBumpButtons = ({ price, productInfoWrapper, productId, ids, card, co
   addButton.addEventListener("click", () => {
     inCartContainer.appendChild(card);
     ogCoupon = getCoupon();
-    setCoupon(couponCode);
+    setCoupon(getBumpCoupon() || couponCode);
     if (productId) {
       document.querySelector("[cart-qtty]").innerHTML = +document.querySelector("[cart-qtty]").innerHTML + 1;
       removeProductAsBump({ productId });

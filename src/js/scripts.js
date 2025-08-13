@@ -1,4 +1,4 @@
-import { resetProducts, setCoupon } from "./modules/appData.js";
+import { resetProducts, setBumpCoupon, setCoupon } from "./modules/appData.js";
 import createCart from "./modules/createCart.js";
 import fetchProducts from "./modules/fetchProducts.js";
 import handleQuantityBump from "./modules/handleQuantityBump.js";
@@ -33,6 +33,8 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump 
       button.addEventListener("click", async () => {
         setCoupon(couponCode);
         const properties = JSON.parse(button.getAttribute("cart-button").replaceAll("'", '"') || null);
+        if (properties.bumpCoupon) setBumpCoupon(properties.bumpCoupon);
+        else setBumpCoupon("");
         if (noCart || (properties && properties.noCart)) handleNoCart({ properties, products, productIds, country });
         else handleCart({ properties, products, productIds, inCartContainer, cartWrapper });
       });

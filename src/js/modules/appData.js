@@ -1,9 +1,12 @@
 let products = {};
 let couponCode = "";
+let bumpCoupon = "";
 
 const getProducts = () => products;
 const getCoupon = () => couponCode;
 const setCoupon = (coupon) => (couponCode = coupon);
+const getBumpCoupon = () => bumpCoupon;
+const setBumpCoupon = (coupon) => (bumpCoupon = coupon);
 const setProduct = ({ productId, optionId, valueId }) => {
   if (!optionId) {
     if (!products[productId]) products[productId] = {};
@@ -49,10 +52,10 @@ const deleteProductOption = ({ productId, optionId }) => {
 };
 
 const resetProducts = () => {
-  for(let key in products){
-    if(products[key].hasOwnProperty('isBump')) products[key].isBump = true;
-    else delete products[key]
+  for (let key in products) {
+    if (products[key].hasOwnProperty("isBump")) products[key].isBump = true;
+    else delete products[key];
   }
 };
 
-export { getProducts, getCoupon, getProductQuantity, setCoupon, setProduct, setProductType, setProductAsBump, setProductQuantity, setProductValues, setProductOptionValue, removeProductValue, removeProductAsBump, deleteProductOption, resetProducts };
+export { getProducts, getCoupon, getBumpCoupon, getProductQuantity, setCoupon, setBumpCoupon, setProduct, setProductType, setProductAsBump, setProductQuantity, setProductValues, setProductOptionValue, removeProductValue, removeProductAsBump, deleteProductOption, resetProducts };

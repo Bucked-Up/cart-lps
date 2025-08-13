@@ -33,10 +33,10 @@ Example:
 <button cart-button></button>
 ```
 
-Optionally, the cart-button attribute can contain a JSON string with productIds and couponCode:
+Optionally, the cart-button attribute can contain a JSON string with productIds, couponCode and bumpCoupon:
 
 ```
-<button cart-button="{'productIds':[{'id':1,'quantity':2}],'couponCode':'ABC123'}"></button>
+<button cart-button="{'productIds':[{'id':1,'quantity':2}],'couponCode':'ABC123', 'bumpCoupon':'ABS123UG'}"></button>
 ```
 
 ## Parameters
