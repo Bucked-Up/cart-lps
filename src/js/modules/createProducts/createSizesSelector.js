@@ -1,4 +1,4 @@
-import { setProduct } from "./appData.js";
+import { setProduct } from "../appData.js";
 
 const createSizesSelector = ({ product, option }) => {
   const sizesSelector = document.createElement("div");

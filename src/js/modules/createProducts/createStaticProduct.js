@@ -1,10 +1,10 @@
 import addQuantitySelector from "./addQuantitySelector.js";
 import addRemoveButton from "./addRemoveButton.js";
-import { setProductQuantity } from "./appData.js";
-import createBumpButtons from "./createBumpButtons.js";
+import { setProductQuantity } from "../appData.js";
 import createProductBase from "./createProductBase.js";
-import updateDomQuantities from "./updateDomQuantities.js";
-import updatePrices from "./updatePrices.js";
+import createBumpButtons from "../handleBumps/createBumpButtons.js";
+import updateDomQuantities from "../updateDomQuantities.js";
+import updatePrices from "../updatePrices.js";
 
 const createStaticProduct = ({ product, isBump }) => {
   updateDomQuantities(product.quantity || 1)

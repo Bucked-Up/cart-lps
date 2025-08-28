@@ -1,6 +1,6 @@
-import { getProductQuantity, getProperties, setProductQuantity } from "./appData.js";
-import updateDomQuantities from "./updateDomQuantities.js";
-import updatePrices from "./updatePrices.js";
+import { getProductQuantity, getProperties, setProductQuantity } from "../appData.js";
+import updateDomQuantities from "../updateDomQuantities.js";
+import updatePrices from "../updatePrices.js";
 
 const addQuantitySelector = ({ wrapper, product }) => {
   const { isDynamic } = getProperties();

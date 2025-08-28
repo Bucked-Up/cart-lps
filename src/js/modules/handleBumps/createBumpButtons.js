@@ -1,5 +1,5 @@
-import { getBumpCoupon, getCoupon, getProductQuantity, removeProductAsBump, setCoupon, setProductAsBump, setProductQuantity } from "./appData.js";
-import updateDomQuantities from "./updateDomQuantities.js";
+import { getBumpCoupon, getCoupon, getProductQuantity, removeProductAsBump, setCoupon, setProductAsBump, setProductQuantity } from "../appData.js";
+import updateDomQuantities from "../updateDomQuantities.js";
 
 const createBumpButtons = ({ price, productInfoWrapper, productId, ids, card, couponCode, quantity }) => {
   const inCartContainer = document.querySelector(".cart__in-cart-container");

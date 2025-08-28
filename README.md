@@ -52,6 +52,22 @@ It receives an object with the following properties:
 - pageData  
   An object containing information about the current page; must include a pageId property with the page's unique identifier.
 
+- isDynamic: {hasPrices: true},
+
+- customButtons
+  can be used instead of the JSON string on the cart-button attribute
+
+  ```
+  customButtons: {
+    "btn-1": {
+      productIds: [
+        { id: 1123, quantity: 6 },
+      ],
+      couponCode: "6LOVEFBV1BO"
+    }
+  }
+  ```
+
 - productIds  
   An array of products to add to the cart. Each product is an object that can have:
 
@@ -97,8 +113,8 @@ It receives an object with the following properties:
       The bump's offer price.
     - couponCode  
       A coupon code applied only to the bump.
-  
-  - if type product: 
+
+  - if type product:
 
     - exemple: ids: [{ id: 999, title: "testtitle", bumpPrice: "12.60", couponCode: "coupon" }],
 

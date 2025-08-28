@@ -1,14 +1,13 @@
-import { getProducts, getProperties, setProduct, setProductOptionValue, setProductQuantity, setProductType } from "./appData.js";
-import checkSizeStock from "./checkSizeStock.js";
+import { getProducts, getProperties, setProduct, setProductOptionValue, setProductQuantity, setProductType } from "../appData.js";
+import checkSizeStock from "../checkSizeStock.js";
 import createDependentProduct from "./createDependentProduct.js";
-import { bounceDynamicCartIcon } from "./createDynamicCartIcon.js";
 import createIndependentProduct from "./createIndependentProduct.js";
 import createOneCardProduct from "./createOneCardProduct.js";
+import isDependent from "../isDependent.js";
+import isStatic from "../isStatic.js";
+import openCart from "../openCart.js";
+import updateDomQuantities from "../updateDomQuantities.js";
 import createStaticProduct from "./createStaticProduct.js";
-import isDependent from "./isDependent.js";
-import isStatic from "./isStatic.js";
-import openCart from "./openCart.js";
-import updateDomQuantities from "./updateDomQuantities.js";
 
 const handleDuplicates = (products) => {
   const newProducts = structuredClone(products);
@@ -26,7 +25,6 @@ const handleDuplicates = (products) => {
 const createProducts = ({ products, inCartContainer, cartWrapper, isBump }) => {
   const newProducts = handleDuplicates(products);
   const { isDynamic } = getProperties();
-  openCart();
   newProducts.forEach((product) => {
     if (isDependent(product)) inCartContainer.appendChild(createDependentProduct({ product, isBump }));
     else if (isStatic(product)) {

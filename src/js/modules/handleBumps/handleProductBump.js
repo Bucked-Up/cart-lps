@@ -1,6 +1,6 @@
-import { setProductAsBump } from "./appData.js";
-import createProducts from "./createProducts.js";
-import handleProductProperties from "./handleProductProperties.js";
+import { setProductAsBump } from "../appData.js";
+import createProducts from "../createProducts/createProducts.js";
+import handleProductProperties from "../handleProductProperties.js";
 
 const handleProductBump = (bump, bumpProducts, cartOrderBumpsContainer) => {
   handleProductProperties(bumpProducts, bump.ids);

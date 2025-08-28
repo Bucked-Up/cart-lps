@@ -1,12 +1,12 @@
 import addQuantitySelector from "./addQuantitySelector.js";
 import addRemoveButton from "./addRemoveButton.js";
-import { setProductType } from "./appData.js";
-import createBumpButtons from "./createBumpButtons.js";
-import createDropdownSelector from "./createDropdownSelector.js";
+import { setProductType } from "../appData.js";
 import createProductBase from "./createProductBase.js";
 import createSizesSelector from "./createSizesSelector.js";
-import updateDomQuantities from "./updateDomQuantities.js";
-import updatePrices from "./updatePrices.js";
+import createDropdownSelector from "./createDropdownSelector/createDropdownSelector.js";
+import updateDomQuantities from "../updateDomQuantities.js";
+import createBumpButtons from "../handleBumps/createBumpButtons.js";
+import updatePrices from "../updatePrices.js";
 
 const createDependentProduct = ({ product, isBump }) => {
   updateDomQuantities(1);

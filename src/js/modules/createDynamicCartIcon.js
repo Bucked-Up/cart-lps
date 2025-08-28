@@ -7,7 +7,7 @@ const bounceDynamicCartIcon = () => {
   icon.onanimationend = () => (icon.style.animation = "");
 };
 
-const createDynamicCartIcon = (cartWrapper) => {
+const createDynamicCartIcon = () => {
   const icon = document.createElement("button");
   icon.classList.add("dynamic-cart-button");
   const qttyNumber = document.createElement("span");

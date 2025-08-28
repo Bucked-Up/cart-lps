@@ -1,10 +1,10 @@
-import createBumpButtons from "./createBumpButtons.js";
-import createDropdownSelector from "./createDropdownSelector.js";
+import createDropdownSelector from "./createDropdownSelector/createDropdownSelector.js";
 import createProductBase from "./createProductBase.js";
 import addRemoveButton from "./addRemoveButton.js";
-import updateDomQuantities from "./updateDomQuantities.js";
+import updateDomQuantities from "../updateDomQuantities.js";
 import addQuantitySelector from "./addQuantitySelector.js";
-import updatePrices from "./updatePrices.js";
+import updatePrices from "../updatePrices.js";
+import createBumpButtons from "../handleBumps/createBumpButtons.js";
 
 const createIndependentProduct = ({ product, option, isBump }) => {
   updateDomQuantities(1)

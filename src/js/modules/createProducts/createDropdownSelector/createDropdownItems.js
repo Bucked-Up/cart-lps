@@ -1,6 +1,6 @@
-import { setProduct } from "./appData.js";
-import checkSizeStock from "./checkSizeStock.js";
-import isDependent from "./isDependent.js";
+import { setProduct } from "../../appData.js";
+import checkSizeStock from "../../checkSizeStock.js";
+import isDependent from "../../isDependent.js";
 
 const createDropdownItems = ({ product, option, image, dropdownText, dropdownVariantsWrapper }) => {
   let hasChecked = false;

@@ -1,5 +1,5 @@
-import { setProduct, setProductValues, setProductQuantity, setProductType, removeProductValue } from "./appData.js";
-import updateDomQuantities from "./updateDomQuantities.js";
+import { setProduct, setProductValues, setProductQuantity, setProductType, removeProductValue } from "../appData.js";
+import updateDomQuantities from "../updateDomQuantities.js";
 
 const createPlaceholder = () => {
   const placeholder = document.createElement("div");

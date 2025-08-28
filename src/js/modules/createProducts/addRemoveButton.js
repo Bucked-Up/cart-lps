@@ -1,7 +1,7 @@
-import { getProducts, getProperties, removeProduct } from "./appData.js";
-import closeCart from "./closeCart.js";
-import updateDomQuantities from "./updateDomQuantities.js";
-import updatePrices from "./updatePrices.js";
+import { getProducts, getProperties, removeProduct } from "../appData.js";
+import closeCart from "../closeCart.js";
+import updateDomQuantities from "../updateDomQuantities.js";
+import updatePrices from "../updatePrices.js";
 
 const addRemoveButton = ({ card, product }) => {
   const { isDynamic } = getProperties();
