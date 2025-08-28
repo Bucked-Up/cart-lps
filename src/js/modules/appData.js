@@ -1,9 +1,12 @@
 let products = {};
+let properties = {};
 let couponCode = "";
 let bumpCoupon = "";
 
 const getProducts = () => products;
 const getCoupon = () => couponCode;
+const getProperties = () => properties;
+const setProperties = (newProperties) => (properties = newProperties);
 const setCoupon = (coupon) => (couponCode = coupon);
 const getBumpCoupon = () => bumpCoupon;
 const setBumpCoupon = (coupon) => (bumpCoupon = coupon);
@@ -40,6 +43,9 @@ const setProductValues = ({ productId, optionId, value }) => {
   if (!products[productId].options[optionId].values) products[productId].options[optionId].values = [];
   products[productId].options[optionId].values.push(value);
 };
+const removeProduct = ({ productId }) => {
+  delete products[productId];
+};
 const removeProductValue = ({ productId, optionId, value }) => {
   const values = products[productId].options[optionId].values;
   values.splice(values.indexOf(value), 1);
@@ -58,4 +64,4 @@ const resetProducts = () => {
   }
 };
 
-export { getProducts, getCoupon, getBumpCoupon, getProductQuantity, setCoupon, setBumpCoupon, setProduct, setProductType, setProductAsBump, setProductQuantity, setProductValues, setProductOptionValue, removeProductValue, removeProductAsBump, deleteProductOption, resetProducts };
+export { getProducts, getCoupon, getBumpCoupon, getProductQuantity, getProperties, setBumpCoupon, setProperties, setCoupon, setProduct, setProductType, setProductAsBump, setProductQuantity, setProductValues, setProductOptionValue, removeProduct, removeProductValue, removeProductAsBump, deleteProductOption, resetProducts };

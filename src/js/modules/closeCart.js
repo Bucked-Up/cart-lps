@@ -1,6 +1,7 @@
-import { resetProducts } from "./appData.js";
+import { getProperties, resetProducts } from "./appData.js";
 
 const closeCart = () => {
+  const { isDynamic } = getProperties();
   const inCartContainer = document.querySelector(".cart__in-cart-container");
   const bumpContainer = document.querySelector(".cart__order-bumps-container");
   const cartWrapper = document.querySelector(".cart-wrapper");
@@ -9,8 +10,10 @@ const closeCart = () => {
   document.body.classList.remove("no-scroll");
   cartWrapper.classList.remove("active");
   if (bumpCard) bumpContainer.appendChild(bumpCard);
-  inCartContainer.innerHTML = "";
-  resetProducts();
+  if(!isDynamic){
+    inCartContainer.innerHTML = "";
+    resetProducts();
+  }
 };
 
 export default closeCart;
