@@ -18,6 +18,16 @@ const handleBuy = (country) => {
       document.querySelector(`[sizes-selector='${prodId}']`).classList.add("shake");
       return;
     }
+    if (products[prodId].type === "isWhole") {
+      const fixedOption = Object.keys(products[prodId].options).find((optionKey) => products[prodId].options[optionKey].value);
+      const valuesOption = Object.keys(products[prodId].options).find((optionKey) => products[prodId].options[optionKey].values);
+      for (let j = 0; j < products[prodId].options[valuesOption].values.length ; j++) {
+        string = string + `&products[${i}][id]=${prodId}&products[${i}][quantity]=1&products[${i}][options][${valuesOption}]=${products[prodId].options[valuesOption].values[j]}`;
+        if (fixedOption) string = string + `&products[${i}][options][${fixedOption}]=${products[prodId].options[fixedOption].value}`;
+        i++;
+      }
+      continue;
+    }
     if (products[prodId].type === "oneCard") {
       const firstOptionId = Object.keys(products[prodId].options)[0];
       for (let j = 0; j < products[prodId].quantity; j++) {

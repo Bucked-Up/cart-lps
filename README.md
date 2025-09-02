@@ -77,6 +77,8 @@ It receives an object with the following properties:
       The unique identifier of the option to force.
     - valueId  
       The specific value to assign to that option.
+  - isWhole
+    Adds every product variant to the cart.
 
 - bump (optional)  
   An optional object for additional offers or upsells. Can have:
@@ -97,8 +99,8 @@ It receives an object with the following properties:
       The bump's offer price.
     - couponCode  
       A coupon code applied only to the bump.
-  
-  - if type product: 
+
+  - if type product:
 
     - exemple: ids: [{ id: 999, title: "testtitle", bumpPrice: "12.60", couponCode: "coupon" }],
 

@@ -2,10 +2,11 @@ import { setProductQuantity } from "./appData.js";
 import createBumpButtons from "./createBumpButtons.js";
 import createProductBase from "./createProductBase.js";
 
-const createStaticProduct = ({ product, isBump }) => {
+const createStaticProduct = ({ product, value, isBump }) => {
   document.querySelector("[cart-qtty]").innerHTML = +document.querySelector("[cart-qtty]").innerHTML + (product.quantity || 1);
   const [card, image, imageWrapper, productTitle, optionTitle, productInfoWrapper] = createProductBase();
   productTitle.innerHTML = product.name;
+  if (value) optionTitle.innerHTML = value.name;
   image.alt = product.name;
   image.src = product.image;
   if (product.quantity) {

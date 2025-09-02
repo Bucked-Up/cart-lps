@@ -8,6 +8,7 @@ const handleProductProperties = (products, properties) => {
     if (property.bumpPrice) product.bumpPrice = property.bumpPrice;
     if (property.couponCode) product.couponCode = property.couponCode;
     if (property.variant) product.hasSetVariant = property.variant;
+    if (property.isWhole) product.isWhole = property.isWhole;
   });
 };
 
