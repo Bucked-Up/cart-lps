@@ -1,9 +1,12 @@
 import { getCoupon, getProducts } from "./appData.js";
+import getCookie from "./getCookie.js";
 import sendVibeLead from "./sendVibeLead.js";
 import toggleLoading from "./toggleLoading.js";
 
 const handleBuy = (country) => {
   const urlParams = new URLSearchParams(window.location.search);
+  const rlAnonId = getCookie("rl_anonymous_id");
+  if (rlAnonId) urlParams.set("rl_anonymous_id", rlAnonId);
   urlParams.set("cc", getCoupon());
   const products = getProducts();
   let string = "";
