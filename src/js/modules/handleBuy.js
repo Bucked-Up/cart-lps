@@ -26,7 +26,7 @@ const handleBuy = (country) => {
     if (products[prodId].type === "isWhole") {
       const fixedOption = Object.keys(products[prodId].options).find((optionKey) => products[prodId].options[optionKey].value);
       const valuesOption = Object.keys(products[prodId].options).find((optionKey) => products[prodId].options[optionKey].values);
-      for (let j = 0; j < products[prodId].options[valuesOption].values.length ; j++) {
+      for (let j = 0; j < products[prodId].options[valuesOption].values.length; j++) {
         string = string + `&products[${i}][id]=${prodId}&products[${i}][quantity]=1&products[${i}][options][${valuesOption}]=${products[prodId].options[valuesOption].values[j]}`;
         if (fixedOption) string = string + `&products[${i}][options][${fixedOption}]=${products[prodId].options[fixedOption].value}`;
         i++;
@@ -44,6 +44,11 @@ const handleBuy = (country) => {
     }
     string = string + `&products[${i}][id]=${prodId}&products[${i}][quantity]=${products[prodId].quantity || 1}`;
     if (products[prodId].recurringId) string = string + getRecurringIdString({ i, recurringId: products[prodId].recurringId });
+    if (products[prodId].recurringIdSeparate && products[prodId].type === "static") {
+      i++;
+      string = string + `&products[${i}][id]=${prodId}&products[${i}][quantity]=1` + getRecurringIdString({ i, recurringId: products[prodId].recurringIdSeparate });
+      continue;
+    }
     if (products[prodId].type !== "static")
       Object.keys(products[prodId].options).forEach((optionId) => {
         string = string + `&products[${i}][options][${optionId}]=${products[prodId].options[optionId].value}`;
