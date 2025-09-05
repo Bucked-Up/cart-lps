@@ -29,13 +29,12 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump 
     const [cartWrapper, inCartContainer, cartOrderBumpsContainer, buyButton] = createCart();
     document.body.appendChild(cartWrapper);
 
-    handleSelectRecurring({productIds});
-
     const buttons = document.querySelectorAll("[cart-button]");
     buttons.forEach((button) => {
       button.addEventListener("click", async () => {
         setCoupon(couponCode);
         const properties = JSON.parse(button.getAttribute("cart-button").replaceAll("'", '"') || null);
+        if (properties?.productIds) handleSelectRecurring(properties?.productIds);
         if (properties?.bumpCoupon) setBumpCoupon(properties.bumpCoupon);
         else setBumpCoupon("");
         if (noCart || (properties && properties.noCart)) handleNoCart({ properties, products, productIds, country });
