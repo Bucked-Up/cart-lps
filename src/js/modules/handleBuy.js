@@ -3,6 +3,8 @@ import getCookie from "./getCookie.js";
 import sendVibeLead from "./sendVibeLead.js";
 import toggleLoading from "./toggleLoading.js";
 
+const getRecurringIdString = ({ i, recurringId }) => `&products[${i}][product_recurring_id]=${recurringId}`;
+
 const handleBuy = (country) => {
   const urlParams = new URLSearchParams(window.location.search);
   const rlAnonId = getCookie("rl_anonymous_id");
@@ -35,11 +37,13 @@ const handleBuy = (country) => {
       const firstOptionId = Object.keys(products[prodId].options)[0];
       for (let j = 0; j < products[prodId].quantity; j++) {
         string = string + `&products[${i}][id]=${prodId}&products[${i}][quantity]=1&products[${i}][options][${firstOptionId}]=${products[prodId].options[firstOptionId].values[j]}`;
+        if (products[prodId].recurringId) string = string + getRecurringIdString({ i, recurringId: products[prodId].recurringId });
         i++;
       }
       continue;
     }
     string = string + `&products[${i}][id]=${prodId}&products[${i}][quantity]=${products[prodId].quantity || 1}`;
+    if (products[prodId].recurringId) string = string + getRecurringIdString({ i, recurringId: products[prodId].recurringId });
     if (products[prodId].type !== "static")
       Object.keys(products[prodId].options).forEach((optionId) => {
         string = string + `&products[${i}][options][${optionId}]=${products[prodId].options[optionId].value}`;

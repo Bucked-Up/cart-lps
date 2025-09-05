@@ -1,4 +1,4 @@
-import { setProduct, setProductOptionValue, setProductType, setProductValues } from "./appData.js";
+import { setProduct, setProductAttribute, setProductOptionValue, setProductType, setProductValues } from "./appData.js";
 import checkSizeStock from "./checkSizeStock.js";
 import createDependentProduct from "./createDependentProduct.js";
 import createIndependentProduct from "./createIndependentProduct.js";
@@ -22,20 +22,21 @@ const createProducts = ({ products, inCartContainer, cartWrapper, isBump }) => {
     } else {
       if (product.quantity)
         product.options.forEach((option) => {
-          createOneCardProduct({ product, option, inCartContainer });
-        });
-      else if (product.isWhole) {
-        setProductType({ productId: product.id, productType: "isWhole" });
-        product.options[0].values.forEach((value) => {
-          inCartContainer.appendChild(createStaticProduct({ product, value }));
-          setProductValues({ productId: product.id, optionId: product.options[0].id, value: value.id });
-        });
-      } else
-        product.options.forEach((option) => {
-          inCartContainer.appendChild(createIndependentProduct({ product, option, isBump }));
-        });
+      createOneCardProduct({ product, option, inCartContainer });
+    });
+    else if (product.isWhole) {
+      setProductType({ productId: product.id, productType: "isWhole" });
+      product.options[0].values.forEach((value) => {
+        inCartContainer.appendChild(createStaticProduct({ product, value }));
+        setProductValues({ productId: product.id, optionId: product.options[0].id, value: value.id });
+      });
+    } else
+      product.options.forEach((option) => {
+        inCartContainer.appendChild(createIndependentProduct({ product, option, isBump }));
+      });
     }
     checkSizeStock({ product });
+    if (product.recurringId) setProductAttribute({ productId: product.id, key: "recurringId", value: product.recurringId });
   });
 };
 export default createProducts;
