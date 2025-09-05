@@ -21,9 +21,10 @@ const setProductType = ({ productId, productType }) => {
   if (!products[productId]) products[productId] = {};
   products[productId].type = productType;
 };
-const setProductAttribute = ({productId, key, value}) =>{
-  if(products[productId]) products[productId][key] = value
-}
+const setProductAttribute = ({ productId, key, value }) => {
+  if (!products[productId]) products[productId] = {};
+  products[productId][key] = value;
+};
 const setProductAsBump = ({ productId }) => {
   products[productId].isBump = true;
 };

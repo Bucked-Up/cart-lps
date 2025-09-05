@@ -10,6 +10,7 @@ import setCookies from "./modules/setCookies.js";
 import toggleLoading from "./modules/toggleLoading.js";
 import handleProductBump from "./modules/handleProductBump.js";
 import closeCart from "./modules/closeCart.js";
+import handleSelectRecurring from "./modules/handleSelectRecurring.js";
 
 const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump }) => {
   window.addEventListener("pageshow", function (event) {
@@ -27,6 +28,8 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump 
 
     const [cartWrapper, inCartContainer, cartOrderBumpsContainer, buyButton] = createCart();
     document.body.appendChild(cartWrapper);
+
+    handleSelectRecurring({productIds});
 
     const buttons = document.querySelectorAll("[cart-button]");
     buttons.forEach((button) => {
