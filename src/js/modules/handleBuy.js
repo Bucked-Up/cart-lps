@@ -10,6 +10,7 @@ const handleBuy = (country) => {
   const rlAnonId = getCookie("rl_anonymous_id");
   if (rlAnonId) urlParams.set("rl_anonymous_id", rlAnonId);
   urlParams.set("cc", getCoupon());
+  urlParams.set("source_url", location.href);
   const products = getProducts();
   let string = "";
   let i = 0;
