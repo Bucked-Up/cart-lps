@@ -60,7 +60,7 @@ const handleBuy = (country) => {
   toggleLoading();
   if (country === "uk") window.location.href = `https://www.buckedup.co.uk/cart/add?${string}&clear=true&${urlParams}`;
   else if (country === "us") window.location.href = `https://funnels.buckedup.com/cart/add?${string}&clear=true&${urlParams}`;
-  else window.location.href = `https://${country && country !== "us" ? country + "." : ""}buckedup.com/cart/add?${string}&clear=true&${urlParams}`;
+  else window.location.href = `https://${country && country !== "us-main" ? country + "." : ""}buckedup.com/cart/add?${string}&clear=true&${urlParams}`;
   // else console.log(`https://${country && country !== "us" ? country + "." : ""}buckedup.com/cart/add?${string}&clear=true&${urlParams}`);
 };
 
