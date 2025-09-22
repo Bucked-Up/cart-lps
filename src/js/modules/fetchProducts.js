@@ -55,6 +55,7 @@ const fetchProducts = async ({ country, productIds }) => {
     let url = `https://funnels.buckedup.com/product/json/detail?product_id=${id}`;
     // let url = `https://webhook-processor-production-4aa3.up.railway.app/webhook/dev?product_id=${id}`;
     if (country && country === "us-main") url = `https://www.buckedup.com/product/json/detail?product_id=${id}`
+    // if (country && country === "us-main") url = `https://webhook-processor-production-4aa3.up.railway.app/webhook/dev-us-main?product_id=${id}`
     try {
       const response = await fetch(url);
       if (response.status === 404) throw new Error(`Product ${id} Not Found.`);
