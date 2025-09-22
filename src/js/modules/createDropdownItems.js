@@ -35,6 +35,8 @@ const createDropdownItems = ({ product, option, image, dropdownText, dropdownVar
       input.checked = true;
       hasChecked = true;
       dropdownText.innerHTML = value.name;
+      image.src = value.images[0];
+      image.alt = value.name;
     }
 
     input.addEventListener("change", () => {
