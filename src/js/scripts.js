@@ -24,6 +24,7 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump 
     const [products, bumpProducts] = await Promise.all([fetchProducts({ productIds, country }), fetchProducts({ productIds: bump?.type === "product" && bump?.ids, country })]);
     if (products.some((product) => Object.keys(product.stock).every((key) => product.stock[key] <= 0))) throw new Error("Out of stock products.");
     // handleIntellimize();
+    const filteredBumpProducts = bumpProducts?.filter((product) => !Object.keys(product.stock).every((key) => product.stock[key] <= 0));
     setCookies({ couponCode, pageId: pageData.pageId });
 
     const [cartWrapper, inCartContainer, cartOrderBumpsContainer, buyButton] = createCart();
@@ -42,7 +43,7 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump 
       });
     });
     if (bump?.type === "quantity") handleQuantityBump(bump, cartOrderBumpsContainer, inCartContainer);
-    else if (bump?.type === "product") handleProductBump(bump, bumpProducts, cartOrderBumpsContainer);
+    else if (bump?.type === "product" && filteredBumpProducts.length > 0) handleProductBump(bump, filteredBumpProducts, cartOrderBumpsContainer);
     buyButton.addEventListener("click", () => handleBuy(country));
     toggleLoading();
   } catch (e) {
