@@ -6,7 +6,8 @@ import toggleLoading from "./toggleLoading.js";
 const getRecurringIdString = ({ i, recurringId }) => `&products[${i}][product_recurring_id]=${recurringId}`;
 
 const handleBuy = (country) => {
-  const urlParams = new URLSearchParams(window.location.search);
+  let urlParams = new URLSearchParams(window.location.search);
+  if(urlParams.size == 0) urlParams = new URLSearchParams(window.location.hash.split("?")[1])
   const rlAnonId = getCookie("rl_anonymous_id");
   if (rlAnonId) urlParams.set("rl_anonymous_id", rlAnonId);
   urlParams.set("cc", getCoupon());
