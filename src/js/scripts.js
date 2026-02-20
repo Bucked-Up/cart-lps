@@ -19,6 +19,8 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump 
       closeCart();
     }
   });
+  let urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.size == 0) urlParams = new URLSearchParams(window.location.hash.split("?")[1]);
   try {
     toggleLoading();
     const [products, bumpProducts] = await Promise.all([fetchProducts({ productIds, country }), fetchProducts({ productIds: bump?.type === "product" && bump?.ids, country })]);
@@ -38,18 +40,18 @@ const lpCart = async ({ noCart, country, pageData, productIds, couponCode, bump 
         if (properties?.productIds) handleSelectRecurring(properties?.productIds);
         if (properties?.bumpCoupon) setBumpCoupon(properties.bumpCoupon);
         else setBumpCoupon("");
-        if (noCart || (properties && properties.noCart)) handleNoCart({ properties, products, productIds, country });
+        if (noCart || (properties && properties.noCart)) handleNoCart({ properties, products, productIds, country, urlParams });
         else handleCart({ properties, products, productIds, inCartContainer, cartWrapper });
       });
     });
     if (bump?.type === "quantity") handleQuantityBump(bump, cartOrderBumpsContainer, inCartContainer);
     else if (bump?.type === "product" && filteredBumpProducts.length > 0) handleProductBump(bump, filteredBumpProducts, cartOrderBumpsContainer);
-    buyButton.addEventListener("click", () => handleBuy(country));
+    buyButton.addEventListener("click", () => handleBuy(country, urlParams));
     toggleLoading();
   } catch (e) {
     console.error(e);
     handleError();
   }
 };
-
+export default lpCart;
 window.lpCart = lpCart;

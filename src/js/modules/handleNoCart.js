@@ -2,7 +2,7 @@ import { setCoupon, setProduct, setProductOptionValue, setProductQuantity, setPr
 import handleBuy from "./handleBuy.js";
 import handleProductProperties from "./handleProductProperties.js";
 
-const handleNoCart = ({ properties, products, productIds, country }) => {
+const handleNoCart = ({ properties, products, productIds, country, urlParams }) => {
   if (properties) {
     if (properties.couponCode) setCoupon(properties.couponCode);
     if (properties.productIds) {
@@ -20,7 +20,7 @@ const handleNoCart = ({ properties, products, productIds, country }) => {
       setProductOptionValue({ productId: product.id, optionId: product.hasSetVariant[0], valueId: product.hasSetVariant[1] });
     }
   });
-  handleBuy(country);
+  handleBuy(country, urlParams);
 };
 
 export default handleNoCart;
